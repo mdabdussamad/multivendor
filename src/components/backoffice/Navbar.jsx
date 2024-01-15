@@ -18,36 +18,41 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import ThemeSwitcherBtn from "@/components/ThemeSwitcherBtn"
+
 
 export default function Navbar() {
   return (
-    <div className="flex items-center justify-between bg-slate-800 text-slate-50 h-20 py-8 fixed top-0 w-full px-8 z-50 left-60 pr-[20rem]">
+    <div className="flex items-center justify-between bg-white
+    dark:bg-slate-800 text-slate-50 h-20 py-8 fixed top-0 w-full 
+    px-8 z-50 left-60 pr-[20rem]">
+
       {/* Icon */}
-      <button>
+      <button className="text-lime-700 dark:text-lime-500">
         <AlignJustify />
       </button>
-      {/* 3 Icon */}
-      
+
+      {/* 3 Icon */}      
       <div className="flex space-x-3">
-        <button>
-          <Sun className="text-green-600" />
-        </button>
-        
-        
+        <ThemeSwitcherBtn />      
+                
         <DropdownMenu> 
           <DropdownMenuTrigger>
           <button
           type="button"
-          className="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-transparent rounded-lg"
+          className="relative inline-flex items-center p-3 
+          text-sm font-medium text-center text-white 
+          bg-transparent rounded"
         >
-          <Bell className="text-green-600" />
+          <Bell className="text-lime-700 dark:text-lime-500" />
           <span className="sr-only">Notifications</span>
-          <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full -top-0 end-6 dark:border-gray-900">
+          <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full -top-0 
+          end-6 dark:border-gray-900">
             20
           </div>
         </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="px-4 py-2 bg-white rounded-2xl pr-8">
+          <DropdownMenuContent className="px-4 py-2 bg-white dark:bg-slate-800 rounded-2xl pr-8">
             <DropdownMenuLabel>Notification</DropdownMenuLabel>
             <DropdownMenuSeparator />
              
@@ -82,7 +87,7 @@ export default function Navbar() {
               />              
               <div className="flex flex-col space-y-1">
                 <p>Yellow Sweet Corn Stock Out,</p>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 ">
                 <p className="px-3 py-0.5 bg-red-700 text-white rounded-full text-sm">Stock Out</p>
                 <p>Dec 12 2021 - 12:40PM</p>
                 </div>              
@@ -126,7 +131,7 @@ export default function Navbar() {
               />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="px-4 py-2 bg-white rounded-2xl pr-8">
+          <DropdownMenuContent className="px-4 py-2 bg-white dark:bg-slate-800  rounded-2xl pr-8">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

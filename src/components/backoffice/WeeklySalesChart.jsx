@@ -39,25 +39,7 @@ export default function WeeklySalesChart() {
   };
   const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-  // const data = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       // label: 'Sales',
-  //       // data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-  //       // borderColor: 'rgb(255, 99, 132)',
-  //       // backgroundColor: 'rgba(255, 99, 132, 0.5)',
-  //     },
-  //     // {
-  //     //   label: 'Dataset 2',
-  //     //   data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-  //     //   borderColor: 'rgb(53, 162, 235)',
-  //     //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
-  //     // },
-  //   ],
-  // };
-
-  const tabs =[
+ const tabs =[
     {
       title:"Sales",
       type:"sales",
@@ -93,8 +75,10 @@ export default function WeeklySalesChart() {
   const [chartTodDisplay, setChartTodDisplay] = useState(tabs[0].title)
   
   return (
-    <div className="bg-slate-700 p-8 rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Weekly Salling</h2>
+    <div className="dark:bg-slate-700 bg-slate-50 p-8 rounded-lg shadow-xl">
+      <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-50">
+        Weekly Sales
+      </h2> 
       <div className="p4">
         {/* Tabs */}
 
@@ -104,7 +88,14 @@ export default function WeeklySalesChart() {
              tabs.map((tab,i)=>{
               return(
                 <li className="me-2" key={i}>
-                <button onClick={()=>setChartTodDisplay(tab.type)} className={chartTodDisplay==tab.type?"inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-orange-500 dark:border-orange-500":"inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-300 hover:border-gray-100 dark:hover:text-gray-100"}>{tab.title}
+                <button 
+                onClick={()=>setChartTodDisplay(tab.type)} 
+                className={
+                  chartTodDisplay==tab.type
+                  ?"inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-orange-500 dark:border-orange-500":"inline-block p-4 border-b-2 border-transparent rounded-t-lg text-slate-800 hover:text-gray-700 hover:border-gray-100 dark:hover:text-gray-100"
+                  }
+                  >
+                    {tab.title}
                 </button>
               </li>
               )
