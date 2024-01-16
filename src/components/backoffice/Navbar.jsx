@@ -19,16 +19,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import ThemeSwitcherBtn from "@/components/ThemeSwitcherBtn"
+import Link from "next/link";
 
 
-export default function Navbar() {
+export default function Navbar({showSidebar, setShowSidebar}) {
   return (
     <div className="flex items-center justify-between bg-white
     dark:bg-slate-800 text-slate-50 h-20 py-8 fixed top-0 w-full 
-    px-8 z-50 left-60 pr-[20rem]">
+    px-8 z-50 sm:pr-[20rem]">
 
+      <Link href={'/dashboard'} className="sm:hidden">
+        Logo
+      </Link>
       {/* Icon */}
-      <button className="text-lime-700 dark:text-lime-500">
+      <button 
+      onClick={() => setShowSidebar(!showSidebar)}
+      className="text-lime-700 dark:text-lime-500">
         <AlignJustify />
       </button>
 

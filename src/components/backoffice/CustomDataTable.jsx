@@ -11,7 +11,6 @@ export default function CustomDataTable() {
   const currentlyDisplayData = data.slice(startIndex, endIndex);
   const totalPages = Math.ceil(data.length / PAGE_SIZE);
   // console.log(data);
-
   const itemStartIndex = startIndex + 1;
   const itemEndIndex = Math.min(startIndex + PAGE_SIZE, data.length);
 
@@ -24,8 +23,7 @@ export default function CustomDataTable() {
           </h2>
 
         {/* Table */}
-        <div className="p-8">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-8">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -162,7 +160,6 @@ export default function CustomDataTable() {
               </li>
             </ul>
           </nav>
-        </div>
         </div>
         
       </div>
