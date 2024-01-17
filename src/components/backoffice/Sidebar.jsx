@@ -13,7 +13,7 @@ import {
   Slack,
   Truck,
   User,
-  User2,
+  Building2,
   UserSquare2,
   Users,
   Warehouse,
@@ -23,6 +23,7 @@ import {
   ScanSearch,
   MonitorPlay,
   ChevronDown,
+  CircleDollarSign,
   
 } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -59,6 +60,16 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
       title: "Our Staff",
       icon: User,
       href: "/dashboard/staff",
+    },
+    {
+      title: "Hygienic Community",
+      icon: Building2,
+      href: "/dashboard/community",
+    },
+    {
+      title: "Wallet",
+      icon: CircleDollarSign,
+      href: "/dashboard/wallet",
     },
     {
       title: "Setting",
@@ -101,8 +112,12 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
   const [openMenu, setOpenMenu] = useState(false)
 
   return (
-    <div className={showSidebar ? "sm:block mt-20 sm:mt-0 dark:bg-slate-700 bg-white space-y-6 w-60 h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 shadow-md" : "mt-20 sm:mt-0 hidden sm:block dark:bg-slate-700 bg-white space-y-6 w-60 h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 shadow-md"
-    }
+    <div 
+    className={
+      showSidebar 
+        ? "sm:block mt-20 sm:mt-0 dark:bg-slate-800 bg-white space-y-6 w-60 h-screen text-slate-800 dark:text-slate-300 fixed left-0 top-0 shadow-md overflow-y-scroll" 
+        : "mt-20 sm:mt-0 hidden sm:block dark:bg-slate-800 bg-white space-y-6 w-60 h-screen text-slate-800 dark:text-slate-300 fixed left-0 top-0 shadow-md overflow-y-scroll"
+      }
     >
       <Link 
         onClick={() => setShowSidebar(false)} 
