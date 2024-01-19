@@ -2,7 +2,14 @@ import React from 'react'
 
 function page() {
   return (
-    <div>Banners</div>
+    <div>
+      <h2>Banners</h2>
+      {/* 
+        image
+        description
+        url
+     */}
+    </div>
   )
 }
 

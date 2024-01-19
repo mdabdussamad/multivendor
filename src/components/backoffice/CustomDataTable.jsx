@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import data from "../../../data.json";
 
+
 export default function CustomDataTable() {
   const PAGE_SIZE = 10;
   const [currentPage, setCurrentPage] = useState(1);

@@ -1,6 +1,6 @@
 import React from "react";
 import PageHeader from "@/components/backoffice/PageHeader";
-import TableActions from "../../../../../components/backoffice/TableActions";
+import TableActions from "@/components/backoffice/TableActions";
 
 export default function page() {
   return (

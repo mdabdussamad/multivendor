@@ -1,24 +1,35 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import FormHeader from "@/components/backoffice/FormHeader";
 import TextInput from '@/components/Forminputs/TextInput';
 import {useForm} from 'react-hook-form';
 import SubmitButton from "@/components/Forminputs/SubmitButton";
 import TextareaInput from "@/components/Forminputs/TextareaInput";
 import { generateSlug } from "@/lib/generateSlug";
+import ImageInput from "@/components/Forminputs/ImageInput"
+import {makePostRequest, makePutRequest} from '@/lib/apiRequest'
 
 export default function newCategory() {
-  const {
-    register,
-    handleSubmit,
-    formState:{errors}
-  } = useForm();
+  const [imageUrl, setImageUrl] = useState("")
+  const [loading, setLoading] = useState(false)
+  const {register, reset, handleSubmit, formState:{errors}} = useForm();
 
   async function onSubmit(data){
+    {/* 
+        -id => auto()
+        -title
+        -slug => auto()
+        -description
+        -image 
+        */}
+    
     const slug = generateSlug(data.title);
     data.slug = slug;
+    data.imageUrl = imageUrl
     console.log(data);
+    makePostRequest(setLoading, 'api/categories', data, 'Category', reset);
+    setImageUrl('');
   }
   return (    
     <div>
@@ -36,20 +47,23 @@ export default function newCategory() {
             name="description"
             register={register}
             errors={errors}
-          />    
+          />   
+          <ImageInput 
+            label="Category Image"
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            endpoint="categoryImageUploader"
+          /> 
       </div>
       
-      <SubmitButton isLoading={false} buttonTitle='Create Category' loadingButtonTitle='Creating Category please wait...' 
+      <SubmitButton 
+      isLoading={loading} 
+      buttonTitle='Create Category' 
+      loadingButtonTitle='Creating Category please wait...' 
       />
       </form>
       
-      {/* 
-        -id
-        -title
-        -slug
-        -description
-        -image 
-        */}
+      
     </div>
   );
 }
