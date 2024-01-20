@@ -11,4 +11,22 @@ export const ourFileRouter = {
       console.log("file url", file.url, metadata);
       return { uploadedBy: "Md. Abdussamad" };
     }),
+  bannerImageUploader: f({ image: { maxFileSize: "1MB" } })
+    // Set permissions and file types for this FileRoute
+    .onUploadComplete(async ({ metadata, file }) => {
+      console.log("file url", file.url, metadata);
+      return { uploadedBy: "Md. Abdussamad" };
+    }),
+  marketLogoUploader: f({ image: { maxFileSize: "1MB" } })
+    // Set permissions and file types for this FileRoute
+    .onUploadComplete(async ({ metadata, file }) => {
+      console.log("file url", file.url, metadata);
+      return { uploadedBy: "Md. Abdussamad" };
+    }),
+  productImageUploader: f({ image: { maxFileSize: "1MB" } })
+    // Set permissions and file types for this FileRoute
+    .onUploadComplete(async ({ metadata, file }) => {
+      console.log("file url", file.url, metadata);
+      return { uploadedBy: "Md. Abdussamad" };
+    }),
 };

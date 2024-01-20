@@ -9,9 +9,28 @@ import TextareaInput from "@/components/Forminputs/TextareaInput";
 import { generateSlug } from "@/lib/generateSlug";
 import ImageInput from "@/components/Forminputs/ImageInput"
 import {makePostRequest, makePutRequest} from '@/lib/apiRequest'
+import SelectInput from "@/components/Forminputs/SelectInput"
 
 export default function newCategory() {
   const [imageUrl, setImageUrl] = useState("")
+  const markets = [
+    {
+      id:1,
+      title:"Sproutes Farmers Market"
+    },
+    {
+      id:2,
+      title:"Cabbage Farmers Market"
+    },
+    {
+      id:3,
+      title:"Carrot Farmers Market"
+    },
+    {
+      id:4,
+      title:"Brocolli Farmers Market"
+    }
+  ]
   const [loading, setLoading] = useState(false)
   const {register, reset, handleSubmit, formState:{errors}} = useForm();
 
@@ -41,7 +60,17 @@ export default function newCategory() {
             name="title"
             register={register}
             errors={errors}
+            className = "w-full"
             />
+        <SelectInput
+            label = "Select Market"
+            name = "marketIds"
+            register = {register}
+            errors = {errors}
+            className = "w-full"
+            options={markets}
+            multiple = {false}
+        />
         <TextareaInput
             label="Category Description"
             name="description"
