@@ -1,14 +1,28 @@
 import { NextResponse } from "next/server";
+import db from "@/lib/db";
 
 export async function POST(request) {
-    // -id => auto()
-    //     -title
-    //     -link   
-    //     -image    
-    //     -toggle
+    {
+        /*
+        -id => auto()
+        -title
+        -link
+        -imageUrl
+        -isActive
+    */
+    }
+
     try {
-        const bannerData = await request.json();        
-        console.log(newBanner)
+        const {title, link, imageUrl, isActive} = await request.json();        
+        const newBanner = await db.banner.create({
+            data:{
+                title, 
+                link, 
+                imageUrl, 
+                isActive
+            }
+        });
+        console.log(newBanner);
         return NextResponse.json(newBanner)
     } catch (error) {
         console.log(error)

@@ -12,6 +12,7 @@ import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import SelectInput from "@/components/Forminputs/SelectInput";
 import ArrayItemsInput from "@/components/Forminputs/ArrayItemsInput";
 import ToggleInput from "@/components/Forminputs/ToggleInput";
+import { useRouter } from "next/navigation";
 
 export default function newFarmer() {
   const [imageUrl, setImageUrl] = useState("");
@@ -57,14 +58,17 @@ export default function newFarmer() {
       isActive: true,
     },
   });
-  //Watch it to be change off and on
+  const router = useRouter()
+    function redirect(){
+      router.push('/dashboard/farmers');
+    }    
   const isActive = watch("isActive");
 
   async function onSubmit(data) {
-    const code = generateUserCode(data.name);
+    const code = generateUserCode('LFF', data.name);
     data.code = code;   
     console.log(code);
-    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset);
+    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset, redirect);
     setImageUrl("");
   }
   return (

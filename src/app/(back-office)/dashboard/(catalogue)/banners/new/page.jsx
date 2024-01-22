@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import FormHeader from "@/components/backoffice/FormHeader";
 import TextInput from "@/components/Forminputs/TextInput";
 import { useForm } from "react-hook-form";
-import SubmitButton from "@/components/Forminputs/SubmitButton"; 
-import { generateSlug } from "@/lib/generateSlug";
+import SubmitButton from "@/components/Forminputs/SubmitButton";
 import ImageInput from "@/components/Forminputs/ImageInput";
-import { makePostRequest, makePutRequest } from "@/lib/apiRequest"; 
+import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import ToggleInput from "@/components/Forminputs/ToggleInput";
+import { useRouter } from "next/navigation";
 
 export default function newBanner() {
-  const [imageUrl, setImageUrl] = useState("");  
+  const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -24,15 +24,25 @@ export default function newBanner() {
       isActive: true,
     },
   });
+  const router = useRouter()
+  function redirect(){
+    router.push('/dashboard/banners');
+  }
   //Watch it to be change off and on
   const isActive = watch("isActive");
-
   async function onSubmit(data) {
-    const slug = generateSlug(data.title);
-    data.slug = slug;
-    data.imageUrl = imageUrl;   
+    {
+      /*
+      -id => auto()
+      -title
+      -link
+      -imageUrl
+      -isActive
+  */
+    }
+    data.imageUrl = imageUrl;
     console.log(data);
-    makePostRequest(setLoading, "api/banners", data, "Banner", reset);
+    makePostRequest(setLoading, "api/banners", data, "Banner", reset, redirect);
     setImageUrl("");
   }
   return (
@@ -53,13 +63,13 @@ export default function newBanner() {
             label="Banner Link"
             name="bannerLink"
             register={register}
-            errors={errors}            
-          />                
-          <ImageInput            
+            errors={errors}
+          />
+          <ImageInput
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
             endpoint="bannerImageUploader"
-          />         
+          />
           <ToggleInput
             label="Publish your Banner"
             name="isActive"

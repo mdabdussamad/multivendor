@@ -1,4 +1,3 @@
-// import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export async function makePostRequest(
@@ -6,8 +5,10 @@ export async function makePostRequest(
   endpoint,
   data,
   resourceName,
-  reset
+  reset,
+  redirect,
 ) {
+  
   try {
     setLoading(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;    
@@ -23,6 +24,7 @@ export async function makePostRequest(
       setLoading(false);
       toast.success(`New ${resourceName} Created Successfully`);
       reset();
+      redirect();
     } else {
       setLoading(false);
       if (response.status === 409) {
@@ -59,7 +61,7 @@ export async function makePutRequest(
       console.log(response);
       setLoading(false);
       toast.success(`${resourceName} Updated Successfully`);
-      redirect();
+      redirect(); 
     } else {
       setLoading(false);
       toast.error("Something Went wrong");

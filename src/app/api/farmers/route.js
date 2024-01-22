@@ -1,13 +1,28 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-    // -id => auto()
-    //     -title
-    //     -link   
-    //     -image    
-    //     -toggle
+    
     try {
-        const farmerData = await request.json();        
+        const {
+            code, 
+            contactPerson, 
+            contactPersonPhone, 
+            email, 
+            name, 
+            notes, 
+            phone, 
+            physicalAddress, 
+            terms} = await request.json();        
+        const newFarmer = {
+            code, 
+            contactPerson, 
+            contactPersonPhone, 
+            email, 
+            name, 
+            notes, 
+            phone, 
+            physicalAddress, 
+            terms}
         console.log(newFarmer)
         return NextResponse.json(newFarmer)
     } catch (error) {

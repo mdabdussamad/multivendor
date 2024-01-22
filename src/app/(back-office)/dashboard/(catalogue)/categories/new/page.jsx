@@ -11,6 +11,7 @@ import ImageInput from "@/components/Forminputs/ImageInput"
 import {makePostRequest, makePutRequest} from '@/lib/apiRequest'
 import SelectInput from "@/components/Forminputs/SelectInput"
 import ToggleInput from "@/components/Forminputs/ToggleInput";
+import { useRouter } from "next/navigation";
 
 export default function newCategory() {
   const [imageUrl, setImageUrl] = useState("")
@@ -43,7 +44,10 @@ export default function newCategory() {
         isActive : true
       }
     });
-
+    const router = useRouter()
+    function redirect(){
+      router.push('/dashboard/banners');
+    }  
   const isActive = watch('isActive')
 
   async function onSubmit(data){
