@@ -7,6 +7,7 @@ import {useForm} from 'react-hook-form';
 import SubmitButton from "@/components/Forminputs/SubmitButton";
 import { generateCouponCode } from "@/lib/generateCouponCode";
 import {makePostRequest, makePutRequest} from '@/lib/apiRequest'
+import ToggleInput from "@/components/Forminputs/ToggleInput";
 
 
 export default function newCoupon() {  
@@ -18,7 +19,13 @@ export default function newCoupon() {
     watch,
     handleSubmit, 
     formState:{errors}
-  } = useForm();
+  } = useForm({
+    defaultValues : {
+      isActive : true
+    }
+  });
+
+  const isActive = watch('isActive') 
   
   async function onSubmit(data){
     {/* 
@@ -53,7 +60,14 @@ export default function newCoupon() {
             register={register}
             errors={errors}
             className='w-full'
-        />        
+        />   
+        <ToggleInput
+            label="Publish your Coupon"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
+          />     
       </div>
       
       <SubmitButton 

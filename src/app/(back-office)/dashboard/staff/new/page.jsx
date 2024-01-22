@@ -13,34 +13,34 @@ import SelectInput from "@/components/Forminputs/SelectInput";
 import ArrayItemsInput from "@/components/Forminputs/ArrayItemsInput";
 import ToggleInput from "@/components/Forminputs/ToggleInput";
 
-export default function newProduct() {
+export default function newFarmer() {
   const [imageUrl, setImageUrl] = useState("");
-  const categories = [
+  const roles = [
     {
       id: 1,
-      title: "Category 1",
+      title: "Role 1",
     },
     {
       id: 2,
-      title: "Category 2",
+      title: "Role 2",
     },
     {
       id: 3,
-      title: "Category 3",
+      title: "Role 3",
     },
   ];
-  const farmers = [
+  const staffs = [
     {
       id: 1,
-      title: "Farmer 1",
+      title: "Staff 1",
     },
     {
       id: 2,
-      title: "Farmer 2",
+      title: "Staff 2",
     },
     {
       id: 3,
-      title: "Farmer 3",
+      title: "Staff 3",
     },
   ];
   // TAGS
@@ -56,95 +56,95 @@ export default function newProduct() {
     defaultValues: {
       isActive: true,
     },
-  });
-  //Watch it to be change off and on
+  }); 
   const isActive = watch("isActive");
-
   async function onSubmit(data) {
-    const slug = generateSlug(data.title);
-    data.slug = slug;
-    data.imageUrl = imageUrl;
-    data.tags = tags;
-    console.log(data);
-    makePostRequest(setLoading, "api/products", data, "Product", reset);
-    setImageUrl("");
+    /*
+    -name
+    -password
+    -email
+    -phone
+    -physicalAddress
+    -NIN
+    -DOB
+    -notes
+    -code
+    -isActive
+    */  
+    const code = generateUserCode("HSM", data.name);
+    data.code = code;   
+    console.log(code);
+    makePostRequest(setLoading, "api/staffs", data, "Staff", reset);   
   }
   return (
     <div>
-      <FormHeader title="New Product" />
+      <FormHeader title="New Staff" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          
           <TextInput
-            label="Product Title"
-            name="title"
+            label="Staff's Full Name"
+            name="name"
             register={register}
-            errors={errors}
+            errors={errors}            
           />
           <TextInput
-            label="Product SKU"
-            name="sku"
-            register={register}
-            errors={errors}
-            className="w-full"
-          />
-          <TextInput
-            label="Product Barcode"
-            name="barcode"
+            label="NIN (Id Number)"
+            name="nin"           
             register={register}
             errors={errors}
             className="w-full"
           />
           <TextInput
-            label="Product Price (Before Discount)"
-            name="productPrice"
-            type="number"
+            label="Date of Birth"
+            name="dob"   
+            type="date"        
             register={register}
             errors={errors}
             className="w-full"
           />
           <TextInput
-            label="Product Sale Price (Discounted)"
-            name="salePrice"
-            type="number"
+            label="Password"
+            name="password"
+            type="password"
             register={register}
             errors={errors}
             className="w-full"
           />
-          <SelectInput
-            label="Select Category"
-            name="categoryId"
+          <TextInput
+            label="Staff's Email Address"
+            name="email"
             register={register}
             errors={errors}
             className="w-full"
-            options={categories}
           />
-          <SelectInput
-            label="Select Farmer"
-            name="farmerId"
+          <TextInput
+            label="Staff's Phone"
+            name="phone"
+            type="tel"
             register={register}
             errors={errors}
             className="w-full"
-            options={farmers}
           />
-          <ImageInput
-            label="Product Image"
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            endpoint="productImageUploader"
-          />
-          {/* Tags  */}
-          <ArrayItemsInput items={tags} setItems={setTags} itemTitle="Tag" />
+          <TextInput
+            label="Staff's physical Address"
+            name="physicalAddress"            
+            register={register}
+            errors={errors}
+            className="w-full"
+          />         
           <TextareaInput
-            label="Product Description"
-            name="description"
+            label="Nots"
+            name="notes"
             register={register}
-            errors={errors}
-          />
+            errors={errors} 
+            isRequired={false}           
+          />                
           <ToggleInput
-            label="Publish your Product"
+            label="Staff Status"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
@@ -153,8 +153,8 @@ export default function newProduct() {
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle="Create Product"
-          loadingButtonTitle="Creating Product please wait..."
+          buttonTitle="Create Staff"
+          loadingButtonTitle="Creating Staff please wait..."
         />
       </form>
     </div>

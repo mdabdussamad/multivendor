@@ -13,7 +13,7 @@ import SelectInput from "@/components/Forminputs/SelectInput";
 import ArrayItemsInput from "@/components/Forminputs/ArrayItemsInput";
 import ToggleInput from "@/components/Forminputs/ToggleInput";
 
-export default function newProduct() {
+export default function newFarmer() {
   const [imageUrl, setImageUrl] = useState("");
   const categories = [
     {
@@ -61,90 +61,80 @@ export default function newProduct() {
   const isActive = watch("isActive");
 
   async function onSubmit(data) {
-    const slug = generateSlug(data.title);
-    data.slug = slug;
-    data.imageUrl = imageUrl;
-    data.tags = tags;
-    console.log(data);
-    makePostRequest(setLoading, "api/products", data, "Product", reset);
+    const code = generateUserCode(data.name);
+    data.code = code;   
+    console.log(code);
+    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset);
     setImageUrl("");
   }
   return (
     <div>
-      <FormHeader title="New Product" />
+      <FormHeader title="New Farmer" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          
           <TextInput
-            label="Product Title"
-            name="title"
-            register={register}
-            errors={errors}
-          />
-          <TextInput
-            label="Product SKU"
-            name="sku"
+            label="Farmer's Full Name"
+            name="name"
             register={register}
             errors={errors}
             className="w-full"
           />
           <TextInput
-            label="Product Barcode"
-            name="barcode"
+            label="Farmer's Phone"
+            name="phone"
+            type="tel"
             register={register}
             errors={errors}
             className="w-full"
           />
           <TextInput
-            label="Product Price (Before Discount)"
-            name="productPrice"
-            type="number"
+            label="Farmer's Email Address"
+            name="email"
             register={register}
             errors={errors}
             className="w-full"
           />
           <TextInput
-            label="Product Sale Price (Discounted)"
-            name="salePrice"
-            type="number"
+            label="Farmer's Physical Address"
+            name="physicalAddress"
             register={register}
             errors={errors}
             className="w-full"
           />
-          <SelectInput
-            label="Select Category"
-            name="categoryId"
+          <TextInput
+            label="Farmer's Contact Persion"
+            name="contactPerson"            
             register={register}
             errors={errors}
             className="w-full"
-            options={categories}
           />
-          <SelectInput
-            label="Select Farmer"
-            name="farmerId"
+          <TextInput
+            label="Farmer's Contact Phone"
+            name="contactPersonPhone" 
+            type="tel"           
             register={register}
             errors={errors}
             className="w-full"
-            options={farmers}
           />
-          <ImageInput
-            label="Product Image"
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            endpoint="productImageUploader"
-          />
-          {/* Tags  */}
-          <ArrayItemsInput items={tags} setItems={setTags} itemTitle="Tag" />
           <TextareaInput
-            label="Product Description"
-            name="description"
+            label="Farmer's Payment Terms"
+            name="terms"
             register={register}
-            errors={errors}
+            errors={errors}            
           />
+          <TextareaInput
+            label="Nots"
+            name="notes"
+            register={register}
+            errors={errors} 
+            isRequired={false}           
+          />                
           <ToggleInput
-            label="Publish your Product"
+            label="Farmer Status"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
@@ -153,8 +143,8 @@ export default function newProduct() {
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle="Create Product"
-          loadingButtonTitle="Creating Product please wait..."
+          buttonTitle="Create Farmer"
+          loadingButtonTitle="Creating Farmer please wait..."
         />
       </form>
     </div>

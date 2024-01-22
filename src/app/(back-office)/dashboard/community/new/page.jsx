@@ -10,10 +10,10 @@ import { generateSlug } from "@/lib/generateSlug";
 import ImageInput from "@/components/Forminputs/ImageInput";
 import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import SelectInput from "@/components/Forminputs/SelectInput";
-import ArrayItemsInput from "@/components/Forminputs/ArrayItemsInput";
 import ToggleInput from "@/components/Forminputs/ToggleInput";
+import QuillEditor from "@/components/Forminputs/QuillEditor";
 
-export default function newProduct() {
+export default function newTraining() {
   const [imageUrl, setImageUrl] = useState("");
   const categories = [
     {
@@ -29,22 +29,6 @@ export default function newProduct() {
       title: "Category 3",
     },
   ];
-  const farmers = [
-    {
-      id: 1,
-      title: "Farmer 1",
-    },
-    {
-      id: 2,
-      title: "Farmer 2",
-    },
-    {
-      id: 3,
-      title: "Farmer 3",
-    },
-  ];
-  // TAGS
-  const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -57,58 +41,49 @@ export default function newProduct() {
       isActive: true,
     },
   });
-  //Watch it to be change off and on
+
+  // Quill Editor
+  const [content, setContent] = useState("");
+  //Custom Tool Bar
+
+  // Quill Editor End
+
   const isActive = watch("isActive");
 
   async function onSubmit(data) {
+    {
+      /* 
+        -id => auto()
+        -title
+        -expertId
+        -categoryId
+        -slug => auto()
+        -description
+        -content => richText
+        -image 
+        */
+    }
+
     const slug = generateSlug(data.title);
     data.slug = slug;
     data.imageUrl = imageUrl;
-    data.tags = tags;
+    data.content = content;
     console.log(data);
-    makePostRequest(setLoading, "api/products", data, "Product", reset);
-    setImageUrl("");
+    makePostRequest(setLoading, 'api/trainings', data, 'Training', reset);
+    setImageUrl('');
+    setContent('');
   }
   return (
     <div>
-      <FormHeader title="New Product" />
+      <FormHeader title="New Training" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Product Title"
+            label="Training Title"
             name="title"
-            register={register}
-            errors={errors}
-          />
-          <TextInput
-            label="Product SKU"
-            name="sku"
-            register={register}
-            errors={errors}
-            className="w-full"
-          />
-          <TextInput
-            label="Product Barcode"
-            name="barcode"
-            register={register}
-            errors={errors}
-            className="w-full"
-          />
-          <TextInput
-            label="Product Price (Before Discount)"
-            name="productPrice"
-            type="number"
-            register={register}
-            errors={errors}
-            className="w-full"
-          />
-          <TextInput
-            label="Product Sale Price (Discounted)"
-            name="salePrice"
-            type="number"
             register={register}
             errors={errors}
             className="w-full"
@@ -121,40 +96,39 @@ export default function newProduct() {
             className="w-full"
             options={categories}
           />
-          <SelectInput
-            label="Select Farmer"
-            name="farmerId"
-            register={register}
-            errors={errors}
-            className="w-full"
-            options={farmers}
-          />
-          <ImageInput
-            label="Product Image"
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            endpoint="productImageUploader"
-          />
-          {/* Tags  */}
-          <ArrayItemsInput items={tags} setItems={setTags} itemTitle="Tag" />
           <TextareaInput
-            label="Product Description"
+            label="Training Description"
             name="description"
             register={register}
             errors={errors}
           />
+          <ImageInput
+            label="Training Thumbnail"
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            endpoint="trainingImageUploader"
+          />
+          {/* content */}
+          <QuillEditor
+            label="Training Content"
+            value={content}
+            onChange={setContent}
+          />
+          {/* content end */}
+
           <ToggleInput
-            label="Publish your Product"
+            label="Publish your Training"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
             register={register}
           />
         </div>
+
         <SubmitButton
           isLoading={loading}
-          buttonTitle="Create Product"
-          loadingButtonTitle="Creating Product please wait..."
+          buttonTitle="Create Training"
+          loadingButtonTitle="Creating Training please wait..."
         />
       </form>
     </div>
