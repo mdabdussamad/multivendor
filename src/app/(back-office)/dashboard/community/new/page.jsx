@@ -12,6 +12,7 @@ import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import SelectInput from "@/components/Forminputs/SelectInput";
 import ToggleInput from "@/components/Forminputs/ToggleInput";
 import QuillEditor from "@/components/Forminputs/QuillEditor";
+import { useRouter } from "next/navigation";
 
 export default function newTraining() {
   const [imageUrl, setImageUrl] = useState("");
@@ -47,7 +48,10 @@ export default function newTraining() {
   //Custom Tool Bar
 
   // Quill Editor End
-
+  const router = useRouter()
+  function redirect(){
+    router.push('/dashboard/cummunity');
+  }  
   const isActive = watch("isActive");
 
   async function onSubmit(data) {
@@ -69,7 +73,7 @@ export default function newTraining() {
     data.imageUrl = imageUrl;
     data.content = content;
     console.log(data);
-    makePostRequest(setLoading, 'api/trainings', data, 'Training', reset);
+    makePostRequest(setLoading, 'api/trainings', data, 'Training', reset, redirect);
     setImageUrl('');
     setContent('');
   }

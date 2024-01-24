@@ -12,7 +12,10 @@ export async function POST(request) {
             notes, 
             phone, 
             physicalAddress, 
-            terms} = await request.json();        
+            terms,
+            isActive,
+            profileImageUrl 
+        } = await request.json();        
         const newFarmer = {
             code, 
             contactPerson, 
@@ -22,7 +25,10 @@ export async function POST(request) {
             notes, 
             phone, 
             physicalAddress, 
-            terms}
+            terms,
+            isActive,
+            profileImageUrl 
+        }
         console.log(newFarmer)
         return NextResponse.json(newFarmer)
     } catch (error) {

@@ -27,8 +27,7 @@ export default function newBanner() {
   const router = useRouter()
   function redirect(){
     router.push('/dashboard/banners');
-  }
-  //Watch it to be change off and on
+  }  
   const isActive = watch("isActive");
   async function onSubmit(data) {
     {
@@ -61,7 +60,7 @@ export default function newBanner() {
           />
           <TextInput
             label="Banner Link"
-            name="bannerLink"
+            name="link"
             register={register}
             errors={errors}
           />

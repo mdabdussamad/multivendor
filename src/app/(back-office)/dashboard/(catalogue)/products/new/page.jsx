@@ -12,6 +12,7 @@ import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import SelectInput from "@/components/Forminputs/SelectInput";
 import ArrayItemsInput from "@/components/Forminputs/ArrayItemsInput";
 import ToggleInput from "@/components/Forminputs/ToggleInput";
+import { useRouter } from "next/navigation";
 
 export default function newProduct() {
   const [imageUrl, setImageUrl] = useState("");
@@ -45,6 +46,7 @@ export default function newProduct() {
   ];
   // TAGS
   const [tags, setTags] = useState([]);
+  console.log(tags);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -57,16 +59,18 @@ export default function newProduct() {
       isActive: true,
     },
   });
-  //Watch it to be change off and on
+  const router = useRouter()
+  function redirect(){
+    router.push('/dashboard/categories');
+  }  
   const isActive = watch("isActive");
-
   async function onSubmit(data) {
     const slug = generateSlug(data.title);
     data.slug = slug;
     data.imageUrl = imageUrl;
     data.tags = tags;
     console.log(data);
-    makePostRequest(setLoading, "api/products", data, "Product", reset);
+    makePostRequest(setLoading, "api/products", data, "Product", reset, redirect);
     setImageUrl("");
   }
   return (

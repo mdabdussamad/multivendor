@@ -37,6 +37,7 @@ export default function newCoupon() {
         -id => auto()
         -title
         -code => auto()
+        -isActive
         -expiryDate        
         */}
     const couponCode = generateCouponCode(data.title, data.expiryDate);

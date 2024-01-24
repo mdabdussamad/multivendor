@@ -94,6 +94,7 @@ export default function newFarmer() {
             register={register}
             errors={errors}
             className="w-full"
+            isRequired={false}
           />
           <TextInput
             label="Farmer's Email Address"
@@ -108,6 +109,7 @@ export default function newFarmer() {
             register={register}
             errors={errors}
             className="w-full"
+            isRequired={false}
           />
           <TextInput
             label="Farmer's Contact Persion"
@@ -115,6 +117,7 @@ export default function newFarmer() {
             register={register}
             errors={errors}
             className="w-full"
+            isRequired={false}
           />
           <TextInput
             label="Farmer's Contact Phone"
@@ -124,11 +127,18 @@ export default function newFarmer() {
             errors={errors}
             className="w-full"
           />
+          <ImageInput 
+              label="Former Profile Image"
+              imageUrl={logoUrl}
+              setLogoUrl={setLogoUrl}
+              endpoint="farmerProfileUploader"
+            /> 
           <TextareaInput
             label="Farmer's Payment Terms"
             name="terms"
             register={register}
-            errors={errors}            
+            errors={errors}
+            isRequired={false}            
           />
           <TextareaInput
             label="Nots"
