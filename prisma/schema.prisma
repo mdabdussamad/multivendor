@@ -112,6 +112,7 @@ model User {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?    @unique
+  password      String
   emailVerified DateTime?  
 
   products      Product[]
@@ -137,11 +138,13 @@ model FarmerProfile {
   physicalAddress        String?
   terms                  String?
   isActive               Boolean
-
+  products               String[] 
+  landSize               Float  
+  mainCrop               String 
   
   user                   User      @relation(fields: [userId], references: [id])
   userId                 String     @db.ObjectId @unique
-
+ 
   createdAt              DateTime  @default(now())
   updatedAt              DateTime? @updatedAt
 }
