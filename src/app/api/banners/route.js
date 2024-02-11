@@ -7,45 +7,38 @@ export async function POST(request) {
         -id => auto()
         -title
         -link
-        -imageUrl
-        -isActive
+        -imageUrl        
     */
     }
 
     try {
-        const {title, link, imageUrl, isActive} = await request.json();        
-        const newBanner = await db.banner.create({
-            data:{
-                title, 
-                link, 
-                imageUrl, 
-                isActive
-            }
-        });
+        const {title, link, imageUrl} = await request.json();        
+        const newBanner = {title, link, imageUrl};
         console.log(newBanner);
         return NextResponse.json(newBanner)
     } catch (error) {
         console.log(error)
         return NextResponse.json({ 
-            message: "Failed to create Banner",
-        error
-        }, {status:500})
+            error: "Failed to create Banner",        
+        }, 
+        {status:500}
+     );
     }
 }
 
-export async function GET(request) {
-    try {
-        const banners = await db.banner.findMany({
-            orderBy:{
-                createdAt:"desc"
-            }
-        });
-        return NextResponse.json(banners);
-    } catch (error) {
-        console.log(error)
-        return NextResponse.json({
-            message: "Failed to Fetch Banner",
-        error
-        }, {status:500})
-    }
-}
+// export async function GET(request) {
+//     try {
+//         const banners = await db.banner.findMany({
+//             orderBy:{
+//                 createdAt:"desc"
+//             }
+//         });
+//         return NextResponse.json(banners);
+//     } catch (error) {
+//         console.log(error)
+//         return NextResponse.json({
+//             message: "Failed to Fetch Banner",
+//         error
+//         }, {status:500})
+//     }
+// }

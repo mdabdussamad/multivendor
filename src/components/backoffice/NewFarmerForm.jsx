@@ -1,18 +1,16 @@
 'use client'
 
 import React, { useState } from "react";
-import FormHeader from "@/components/backoffice/FormHeader";
 import TextInput from '@/components/Forminputs/TextInput';
 import {useForm} from 'react-hook-form';
 import SubmitButton from "@/components/Forminputs/SubmitButton";
 import TextareaInput from "@/components/Forminputs/TextareaInput";
-import { generateSlug } from "@/lib/generateSlug";
 import ImageInput from "@/components/Forminputs/ImageInput"
 import {makePostRequest, makePutRequest} from '@/lib/apiRequest'
-import SelectInput from "@/components/Forminputs/SelectInput"
 import ToggleInput from "@/components/Forminputs/ToggleInput";
 import { useRouter } from "next/navigation";
 import ArrayItemsInput from "@/components/Forminputs/ArrayItemsInput"
+import generateUserCode from "@/lib/generateUserCode"
 
 export default function NewFarmerForm({user}) {
   const [loading, setLoading] = useState(false);
@@ -39,13 +37,10 @@ export default function NewFarmerForm({user}) {
   const isActive = watch('isActive');
   async function onSubmit(data){   
     
-    const code = generateSlug("LFF", data.name);
-    data.code = code;
-    data.userId = user.id;    
-    data.products = products;
-    data.profileImageUrl = profileImageUrl;
+    const code = generateUserCode("LFF", data.name);
+    data.code = code;    
     console.log(data);
-    makePostRequest(setLoading, 'api/farmers', data, 'Farmer Profile', reset, redirect);    
+    makePostRequest(setLoading, 'api/farmers', data, 'Farmer', reset, redirect);    
   }
   return (    
     <form onSubmit={handleSubmit(onSubmit)} 
@@ -56,13 +51,14 @@ export default function NewFarmerForm({user}) {
         <TextInput 
             label="Farmer's Full Name"
             name="name"
-            register={register}
+            register={register} 
             errors={errors} 
             className = "w-full"            
             />        
         <TextInput 
             label="Farmer's Phone"
             name="phone"
+            type="tel"
             register={register}
             errors={errors} 
             className = "w-full"            
@@ -91,61 +87,25 @@ export default function NewFarmerForm({user}) {
         <TextInput
             label = "Farmer's Contact Person Phone"
             name = "ContactPersonPhone"
+            type = "tel"
             register = {register}
             errors = {errors}
             className = "w-full"             
-        /> 
-        {/* Accare */}
-        <TextInput
-            label = "What is size of your Land in Accares"
-            name = "landSize"
-            type="number"
-            register = {register}
-            errors = {errors}
-            className = "w-full"             
-        /> 
-        <TextInput
-            label = "What is your main Crop that you Cultivate"
-            name = "mainCrop"
-            type="text"
-            register = {register}
-            errors = {errors}
-            className = "w-full"             
-        /> 
-        <ArrayItemsInput 
-            setItems={setProducts} 
-            items={products} 
-            itemTitle="Product"
-        />  
-        {/* Configure this endpoint in this core js */}
-        <ImageInput 
-            label="Farmer Profile Image"
-            imageUrl={profileImageUrl}
-            setImageUrl={setProfileImageUrl}
-            endpoint="farmerProfileUploader"
-        />     
+        />                           
         <TextareaInput
             label="Farmer's Payment Terms"
             name="terms"
             register={register}
             errors={errors}
           />  
-          <TextInput
+          <TextareaInput
             label = "Notes"
             name = "notes"
             register = {register}
             errors = {errors}
-            className = "w-full"             
-        /> 
-          <ToggleInput
-            label="Farmer Status"
-            name="isActive"
-            trueTitle="Active"
-            falseTitle="Draft"
-            register={register}
-          />
-      </div>
-      
+            isRequired = {false}                        
+        />          
+      </div>      
       <SubmitButton 
       isLoading={loading} 
       buttonTitle='Create Farmer' 

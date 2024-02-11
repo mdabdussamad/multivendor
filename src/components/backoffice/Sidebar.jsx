@@ -92,12 +92,7 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
       title: "Categories",
       icon: LayoutList,
       href: "/dashboard/categories",
-    },
-    {
-      title: "Attributes",
-      icon: SendToBack,
-      href: "/dashboard/attributes",
-    },
+    },    
     {
       title: "Coupons",
       icon: ScanSearch,
@@ -151,7 +146,7 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
               {openMenu ? <ChevronDown /> : <ChevronRight />}
             </button>
           </CollapsibleTrigger>
-          <CollapsibleContent className="rounded-lg py-3 px-3 pl-6 bg-slate-100 dark:bg-slate-800 shadow">
+          <CollapsibleContent className="rounded-lg py-3 px-3 pl-6 dark:text-slate-300 dark:bg-slate-800 shadow">
             {catalogueLinks.map((item, i) => {
               const Icon = item.icon;
               return (

@@ -16,26 +16,13 @@ import { useRouter } from "next/navigation";
 export default function newMarket() {
   const [logoUrl, setLogoUrl] = useState(""); 
   const [loading, setLoading] = useState(false);
-  const categories =[
-    {
-      id: 1,
-      title: "Category 1"
-    },
-    {
-      id: 2,
-      title: "Category 2"
-    },
-    {
-      id: 3,
-      title: "Category 3"
-    }
-  ]
   const {
     register, 
     reset, 
-    watch,
+    watch, 
     handleSubmit, 
-    formState:{errors}} = useForm({
+    formState:{errors},
+  } = useForm({
       defaultValues : {
         isActive : true
       }
@@ -74,21 +61,21 @@ export default function newMarket() {
             name="title"
             register={register}
             errors={errors} 
-            className = "w-full"            
+            // className = "w-full"            
             />        
-        <SelectInput
+        {/* <SelectInput
             label = "Select Categories"
             name = "categoryIds"
             register = {register}
             errors = {errors}
-            className = "w-full"
+            className = "w-full" 
             options={categories}
             multiple = {true}
-        />
+        /> */}
         <ImageInput 
               label="Market Logo"
               imageUrl={logoUrl}
-              setLogoUrl={setLogoUrl}
+              setImageUrl={setLogoUrl}
               endpoint="marketLogoUploader"
             />     
         <TextareaInput
@@ -97,13 +84,13 @@ export default function newMarket() {
             register={register}
             errors={errors}
           />   
-          <ToggleInput
+          {/* <ToggleInput
             label="Market Status"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
             register={register}
-          />
+          /> */}
       </div>
       
       <SubmitButton 
