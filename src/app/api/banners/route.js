@@ -26,19 +26,19 @@ export async function POST(request) {
     }
 }
 
-// export async function GET(request) {
-//     try {
-//         const banners = await db.banner.findMany({
-//             orderBy:{
-//                 createdAt:"desc"
-//             }
-//         });
-//         return NextResponse.json(banners);
-//     } catch (error) {
-//         console.log(error)
-//         return NextResponse.json({
-//             message: "Failed to Fetch Banner",
-//         error
-//         }, {status:500})
-//     }
-// }
+export async function GET(request) {
+    try {
+        const banners = await db.banner.findMany({
+            orderBy:{
+                createdAt:"desc"
+            }
+        });
+        return NextResponse.json(banners);
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({
+            message: "Failed to Fetch Banner",
+        error
+        }, {status:500})
+    }
+}

@@ -8,7 +8,7 @@ export default function page() {
       {/* Header */}
       <PageHeader
         heading="Hygienic Community Trainings"
-        href="/dashboard/community/new"
+        href="/dashboard/cummunity/new"
         linkTitle="Add Training"
       />
 

@@ -65,18 +65,25 @@ model Market {
   categories  Category[] @relation(fields: [categoryIds], references: [id])
   createdAt   DateTime   @default(now())
   updatedAt   DateTime?  @updatedAt
-}
+} 
 model Product {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  title         String     @unique
+  title         String     
   slug          String     @unique
   imageUrl      String?
   description   String?
   isActive      Boolean
+  isWholesale   Boolean
   sku           String?
-  barcode       String
+  barcode       String?
+  productCode   String?
+  unit          String?
   productPrice  Float
   salePrice     Float
+  wholeSalePrice  Float
+  wholesaleQty  Int
+  productStock  Int
+  qty           Int
   tags          String[]
  
   category      Category   @relation(fields: [categoryId], references: [id])
@@ -98,7 +105,10 @@ model Training {
   content        String 
   isActive       Boolean 
   category       Category   @relation(fields: [categoryId], references: [id])
-  categoryId     String     @db.ObjectId    
+  categoryId     String     @db.ObjectId
+
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime?  @updatedAt    
 }
 
 enum UserRole {

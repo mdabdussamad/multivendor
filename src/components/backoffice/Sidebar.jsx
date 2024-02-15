@@ -64,7 +64,7 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
     {
       title: "Hygienic Community",
       icon: Building2,
-      href: "/dashboard/community",
+      href: "/dashboard/cummunity",      
     },
     {
       title: "Wallet",

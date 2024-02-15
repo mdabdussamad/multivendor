@@ -10,7 +10,7 @@ export async function POST(request) {
             where: {
                 slug
             }
-        })
+        });
         if (existingCategory){
             return NextResponse.json({
                 data: null,
