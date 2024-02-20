@@ -4,6 +4,7 @@ import { withUt } from "uploadthing/tw";
 export default withUt({
   darkMode: ["class"],
   content: [
+    'node_modules/flowbite-react/lib/esm/**/*.js',
     './pages/**/*.{js,jsx}',
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
@@ -77,6 +78,7 @@ export default withUt({
   },
   plugins: [
     require("tailwindcss-animate"),
-    require('@tailwindcss/forms')
+    require('@tailwindcss/forms'),
+    require('flowbite/plugin'),
   ],
 });

@@ -117,7 +117,7 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
       <Link 
         onClick={() => setShowSidebar(false)} 
         className="px-6 py-4" href="/dashboard">
-        <Image src={logo} alt="hygienicfood logo" className="w-36"/>
+        <Image src={logo} alt="hygienicfood logo" className="w-24 rounded-full"/>
       </Link>
 
       <div className="space-y-3 flex flex-col">
