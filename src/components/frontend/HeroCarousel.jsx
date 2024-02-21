@@ -24,7 +24,7 @@ export default function HeroCarousel() {
           width={712}
           height={384}
           src="/banners/1.jpg"
-          alt=""
+          alt="Alt text"
           className="w-full"
         />
       </Link>
@@ -33,7 +33,7 @@ export default function HeroCarousel() {
           width={712}
           height={384}
           src="/banners/2.jpg"
-          alt=""
+          alt="Alt text"
           className="w-full"
         />
       </Link>
@@ -42,7 +42,7 @@ export default function HeroCarousel() {
           width={712}
           height={384}
           src="/banners/3.png"
-          alt=""
+          alt="Alt text"
           className="w-full"
         />
       </Link>
@@ -51,7 +51,7 @@ export default function HeroCarousel() {
           width={712}
           height={384}
           src="/banners/4.jpg"
-          alt=""
+          alt="Alt text"
           className="w-full"
         />
       </Link>
@@ -60,7 +60,7 @@ export default function HeroCarousel() {
           width={712}
           height={384}
           src="/banners/5.png"
-          alt=""
+          alt="Alt text"
           className="w-full"
         />
       </Link>
