@@ -6,7 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function MarketsCarousel() {
+export default function MarketsCarousel({markets}) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -24,7 +24,6 @@ export default function MarketsCarousel() {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-  const slides = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
   return (
     <Carousel
       swipeable={false}
@@ -44,17 +43,17 @@ export default function MarketsCarousel() {
       dotListClass="custom-dot-list-style"
       itemClass="px-4"
     >
-      {slides.map((slide, i) => {
+      {markets.map((market,i) => {
         return (
           <Link key={i} href="#" className="rounded-lg mr-3 bg-red-400">
             <Image
-              src="/tomato.webp"
-              alt="vegitables"
+              src={market.logoUrl}
+              alt={market.title}
               width={556}
               height={556}
-              className="w-full"
+              className="w-full rounded-2xl"
             />
-            <h2 className="text-center dark:text-slate-200 text-slate-800 mt-2">Vegitables</h2>
+            <h2 className="text-center dark:text-slate-200 text-slate-800 mt-2">{market.title}</h2>
           </Link>
         );
       })}

@@ -61,7 +61,9 @@ export async function GET(request) {
         console.log(error)
         return NextResponse.json({
             message: "Failed to Fetch Trainings",
-            error
-        }, { status: 500 })
+            error,
+        }, 
+        { status: 500 }
+        );
     }
 }

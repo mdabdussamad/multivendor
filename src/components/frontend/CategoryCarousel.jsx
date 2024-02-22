@@ -5,12 +5,13 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Image from "next/image";
 import Link from "next/link";
+import { BaggageClaim } from "lucide-react";
 
-export default function CategoryCarousel() {
+export default function CategoryCarousel({ products }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 6,
+      items: 4,
       slidesToSlide: 3, // optional, default to 1.
     },
     tablet: {
@@ -24,7 +25,6 @@ export default function CategoryCarousel() {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-  const slides = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
   return (
     <Carousel
       swipeable={false}
@@ -44,18 +44,33 @@ export default function CategoryCarousel() {
       dotListClass="custom-dot-list-style"
       itemClass="px-4"
     >
-      {slides.map((slide, i) => {
+      {products.map((product, i) => {
         return (
-          <Link key={i} href="#" className="rounded-lg mr-3 bg-red-400">
-            <Image
-              src="/tomato.webp"
-              alt="vegitables"
-              width={556}
-              height={556}
-              className="w-full"
-            />
-            <h2 className="text-center dark:text-slate-200 text-slate-800 mt-2">Vegitables</h2>
-          </Link>
+          <div key={i} className="rounded-lg mr-3 bg-white dark:bg-slate-900 overflow-hidden border shadow">
+            <Link href="#">
+              <Image
+                src={product.imageUrl}
+                alt={product.title}
+                width={556}
+                height={556}
+                className="w-full h-48 object-cover"
+              />
+            </Link>
+            <Link href="#">
+              <h2 className="text-center dark:text-slate-200 text-slate-800 my-2 font-semibold">
+                {product.title}
+              </h2>
+            </Link>
+            <div className="px-4">
+              <div className="flex items-center justify-between gap-2 pb-3 dark:text-slate-200 text-slate-800">
+                <p>NPR {product.salePrice}</p>
+                <button className="flex items-center space-x-2 bg-lime-600 px-4 py-2 rounded-md text-white">
+                  <BaggageClaim />
+                  <span>Add</span>
+                </button>
+              </div>
+            </div>
+          </div>
         );
       })}
     </Carousel>

@@ -65,8 +65,15 @@ export default function newBanner() {
             label="Banner Image"
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
-            endpoint="bannerImageUploader"
-          />          
+            endpoint="bannerImageUploader"   
+          />  
+          <ToggleInput
+            label="Publish your Banner"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
+          />        
         </div>
         <SubmitButton
           isLoading={loading}

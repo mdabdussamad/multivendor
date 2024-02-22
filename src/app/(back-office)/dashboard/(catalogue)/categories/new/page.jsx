@@ -63,14 +63,7 @@ export default function newCategory() {
             register={register}
             errors={errors} 
             className="w-full"         
-            />        
-        {/* <SelectInput 
-            label="Select Market"
-            name="title"
-            register={register}
-            errors={errors} 
-            className="w-full"         
-            />         */}
+            />            
         <TextareaInput
             label="Category Description"
             name="description"
