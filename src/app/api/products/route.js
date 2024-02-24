@@ -1,27 +1,7 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
-
-    // barcode
-    // categoryId 
-    // description 
-    // userId:farmerId 
-    // imageUrl 
-    // isActive 
-    // isWholesale 
-    // productCode 
-    // productPrice 
-    // salePrice 
-    // sku 
-    // slug 
-    // tags 
-    // title 
-    // unit
-    // wholeSalePrice
-    // wholesaleQty
-    // productStock   
-    // qty           
+export async function POST(request) {              
 
     try {
         const {

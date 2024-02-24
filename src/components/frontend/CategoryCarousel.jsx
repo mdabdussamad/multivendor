@@ -47,7 +47,7 @@ export default function CategoryCarousel({ products }) {
       {products.map((product, i) => {
         return (
           <div key={i} className="rounded-lg mr-3 bg-white dark:bg-slate-900 overflow-hidden border shadow">
-            <Link href="#">
+            <Link href={`/products/${product.slug}`}>
               <Image
                 src={product.imageUrl}
                 alt={product.title}
@@ -56,7 +56,7 @@ export default function CategoryCarousel({ products }) {
                 className="w-full h-48 object-cover"
               />
             </Link>
-            <Link href="#">
+            <Link href={`/products/${product.slug}`}>
               <h2 className="text-center dark:text-slate-200 text-slate-800 my-2 font-semibold">
                 {product.title}
               </h2>
