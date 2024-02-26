@@ -1,8 +1,11 @@
 import React from "react";
 import PageHeader from "@/components/backoffice/PageHeader";
-import TableActions from "../../../../../components/backoffice/TableActions";
+import DataTable from "@/components/data-table-components/DataTable";
+import { getData } from "@/lib/getData";
+import { columns } from "./columns";
 
-export default function Coupons() {
+export default async function Coupons() {
+  const coupons = await getData("coupons");
   return (
     <div>
       {/* Header */}
@@ -12,12 +15,8 @@ export default function Coupons() {
         linkTitle="Add Coupon"
       />
 
-      {/* Table Actions */}
-      {/* Export || Search || Bulk Delete */}
-      <TableActions  />
-
       <div className="py-8">
-      <h2>Table</h2>
+        <DataTable data={coupons} columns={columns} />
       </div>
     </div>
   );

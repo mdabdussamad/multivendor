@@ -1,10 +1,9 @@
 "use client"
 
-import { Checkbox } from "@/components/ui/checkbox";
-import DateColumn from '@/components/DataTableColumns/DateColumn';
-import ImageColumn from '@/components/DataTableColumns/ImageColumn';
-import SortableColumn from '@/components/DataTableColumns/SortableColumn';
-import ActionColumn from '@/components/DataTableColumns/ActionColumn';
+import { Checkbox } from "@/components/ui/checkbox"
+import SortableColumn from "@/components/DataTableColumns/SortableColumn"
+import DateColumn from "@/components/DataTableColumns/DateColumn"
+import ActionColumn from "@/components/DataTableColumns/ActionColumn"
 
 export const columns = [
   {
@@ -32,27 +31,19 @@ export const columns = [
   {
     accessorKey: "title",
     header: ({ column }) => (<SortableColumn column={column} title='Title' />)
+  },  
+  {
+    accessorKey: "couponCode",
+    header: "Coupon Code",
   },
   {
-    accessorKey: "imageUrl",
-    header: "Category Image",
-    cell: ({ row }) => (<ImageColumn row={row} accessorKey='imageUrl' />)
+    accessorKey: "expiryDate",
+    header: "Expiry Date ",
+    cell: ({ row }) => (<DateColumn row={row} accessorKey='expiryDate' />)
   },
-  // {
-  //   accessorKey: "description",
-  //   header: "Description",
-  //   cell: ({ row }) => {
-  //       const description = row.getValue("description")            
-  //       return (
-  //           <div className="line-clamp-1">
-  //               {description}
-  //           </div>
-  //       );
-  //     },
-  // },
   {
     accessorKey: "isActive",
-    header: "Active",
+    header: "IsActive",
   },
   {
     accessorKey: "createdAt",
@@ -62,6 +53,6 @@ export const columns = [
   {
     id: "actions",
     header: "Action",
-    cell: ({ row }) => (<ActionColumn row ={row} title='Category' />)
+    cell: ({ row }) => (<ActionColumn row ={row} title='Coupon' />)
   },
 ]

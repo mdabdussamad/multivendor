@@ -35,21 +35,9 @@ export const columns = [
   },
   {
     accessorKey: "imageUrl",
-    header: "Category Image",
+    header: "Product Image",
     cell: ({ row }) => (<ImageColumn row={row} accessorKey='imageUrl' />)
-  },
-  // {
-  //   accessorKey: "description",
-  //   header: "Description",
-  //   cell: ({ row }) => {
-  //       const description = row.getValue("description")            
-  //       return (
-  //           <div className="line-clamp-1">
-  //               {description}
-  //           </div>
-  //       );
-  //     },
-  // },
+  },  
   {
     accessorKey: "isActive",
     header: "Active",
@@ -62,6 +50,6 @@ export const columns = [
   {
     id: "actions",
     header: "Action",
-    cell: ({ row }) => (<ActionColumn row ={row} title='Category' />)
+    cell: ({ row }) => (<ActionColumn row ={row} title='Product' />)
   },
 ]
