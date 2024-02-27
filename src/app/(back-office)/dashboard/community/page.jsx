@@ -1,23 +1,22 @@
 import React from "react";
 import PageHeader from "@/components/backoffice/PageHeader";
-import TableActions from "@/components/backoffice/TableActions";
+import DataTable from "@/components/data-table-components/DataTable";
+import { getData } from "@/lib/getData";
+import { columns } from './columns';
 
-export default function page() {
+export default async function page() {
+  const trainings = await getData('trainings');
   return (
     <div>
       {/* Header */}
       <PageHeader
         heading="Hygienic Community Trainings"
-        href="/dashboard/cummunity/new"
+        href="/dashboard/community/new"
         linkTitle="Add Training"
       />
 
-      {/* Table Actions */}
-      {/* Export || Search || Bulk Delete */}
-      <TableActions  />
-
       <div className="py-8">
-      <h2>Table</h2>
+        <DataTable data={trainings} columns={columns} />
       </div>
     </div>
   );

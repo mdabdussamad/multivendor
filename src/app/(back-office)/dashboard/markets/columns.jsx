@@ -31,12 +31,12 @@ export const columns = [
   },  
   {
     accessorKey: "title",
-    header: ({ column }) => (<SortableColumn column={column} title='Title' />)
+    header: ({ column }) => (<SortableColumn column={column} title='title' />)
   },
   {
-    accessorKey: "imageUrl",
-    header: "Product Image",
-    cell: ({ row }) => (<ImageColumn row={row} accessorKey='imageUrl' />)
+    accessorKey: "logoUrl",
+    header: "Market Logo",
+    cell: ({ row }) => (<ImageColumn row={row} accessorKey='logoUrl' />)
   },  
   {
     accessorKey: "isActive",
@@ -50,12 +50,12 @@ export const columns = [
   {
     id: "actions",   
     cell: ({ row }) => {
-      const product = row.original;
+      const market = row.original;
       return (
         <ActionColumn
           row ={row} 
-          title='Product' 
-          endpoint={`products/${product.id}`} 
+          title='Market' 
+          endpoint={`markets/${market.id}`} 
         />
       );      
     },

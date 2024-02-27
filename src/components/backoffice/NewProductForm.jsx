@@ -47,8 +47,8 @@ export default function NewProductForm({categories,farmers}) {
     data.tags = tags;
     data.qty = 1;
     data.productCode = productCode;
-    console.log(data);
-    makePostRequest(setLoading, "api/products", data, "Product", reset, redirect);
+    console.log(data);    
+    makePostRequest(setLoading, 'api/products', data, 'Product', reset, redirect);
     setImageUrl("");
     setTags([])
   }
@@ -97,7 +97,7 @@ export default function NewProductForm({categories,farmers}) {
             className="w-full"
           />
           <TextInput
-            label="Product Stock)"
+            label="Product Stock"
             name="productStock"
             type="number"
             register={register}

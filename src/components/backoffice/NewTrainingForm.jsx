@@ -41,7 +41,7 @@ export default function NewTrainingForm({categories}) {
 
   const router = useRouter();
   function redirect(){
-    router.push('/dashboard/cummunity');
+    router.push('/dashboard/community');
   }  
   const isActive = watch("isActive");
   async function onSubmit(data) { 

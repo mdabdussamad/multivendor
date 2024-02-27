@@ -33,15 +33,7 @@ export default function NewMarketForm({categories}) {
     }  
   const isActive = watch('isActive')
 
-  async function onSubmit(data){
-    {/* 
-        -id => auto()
-        -title
-        -slug => auto()
-        -logo
-        -description 
-        */}
-    
+  async function onSubmit(data){      
     const slug = generateSlug(data.title);
     data.slug = slug;
     data.logoUrl = imageUrl

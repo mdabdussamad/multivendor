@@ -9,14 +9,13 @@ import TextareaInput from "@/components/Forminputs/TextareaInput";
 import { generateSlug } from "@/lib/generateSlug";
 import ImageInput from "@/components/Forminputs/ImageInput"
 import {makePostRequest, makePutRequest} from '@/lib/apiRequest'
-import SelectInput from "@/components/Forminputs/SelectInput"
 import ToggleInput from "@/components/Forminputs/ToggleInput";
 import { useRouter } from "next/navigation";
 
 export default function newCategory() {
-  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrl, setImageUrl] = useState("");
   // const markets = [];
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const {
     register, 
     reset, 
@@ -90,8 +89,7 @@ export default function newCategory() {
       buttonTitle='Create Category' 
       loadingButtonTitle='Creating Category please wait...' 
       />
-      </form>
-      
+      </form>     
       
     </div>
   );

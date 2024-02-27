@@ -38,19 +38,19 @@ export async function POST(request) {
     };
 }
 
-// export async function GET(request) {
-//     try {
-//         const profiles = await db.farmerProfile.findMany({
-//             orderBy:{
-//                 createdAt:"desc"
-//             }
-//         });
-//         return NextResponse.json(profiles);
-//     } catch (error) {
-//         console.log(error)
-//         return NextResponse.json({
-//             message: "Failed to Fetch Profile",
-//         error
-//         }, {status:500})
-//     }
-// }
+export async function GET(request) {
+    try {
+        const profiles = await db.farmerProfile.findMany({
+            orderBy:{
+                createdAt:"desc"
+            }
+        });
+        return NextResponse.json(profiles);
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({
+            message: "Failed to Fetch Profile",
+        error
+        }, {status:500})
+    }
+}

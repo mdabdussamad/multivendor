@@ -3,49 +3,46 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request,{params:{id}}) {
     try {
-        const category = await db.category.findUnique({
+        const product = await db.product.findUnique({
             where:{
-                id
-            },
-            include:{
-                products:true,
-            },
+                id,
+            }           
         });
-        return NextResponse.json(category);
+        return NextResponse.json(product);
     } catch (error) {
         console.log(error)
         return NextResponse.json({
-            message: "Failed to Fetch Category",
+            message: "Failed to Fetch Product",
         error
         }, {status:500})
     }
 }
 export async function DELETE(request, { params: { id } }) {
     try {
-        const existingCategory = await db.category.findUnique({
+        const existingProduct = await db.product.findUnique({
             where: {
                 id,
             }            
         });
-        if(!existingCategory) {
+        if(!existingProduct) {
             return NextResponse.json({
                 data:null,
-                message:"Category Not Found",
+                message:"Product Not Found",
             },
             {status:404}
           );
         }
-        const deleteCategory = await db.category.delete({
+        const deleteProduct = await db.product.delete({
             where:{
                 id,
             },    
         });
-        return NextResponse.json(deleteCategory);
+        return NextResponse.json(deleteProduct);
     } catch (error) {
         console.log(error)
         return NextResponse.json(
          {
-            message: "Failed to Delete Category",
+            message: "Failed to Delete Product",
             error,
          }, 
         { status:500 }

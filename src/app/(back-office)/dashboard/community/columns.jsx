@@ -35,7 +35,7 @@ export const columns = [
   },
   {
     accessorKey: "imageUrl",
-    header: "Product Image",
+    header: "Thumbnail",
     cell: ({ row }) => (<ImageColumn row={row} accessorKey='imageUrl' />)
   },  
   {
@@ -50,12 +50,12 @@ export const columns = [
   {
     id: "actions",   
     cell: ({ row }) => {
-      const product = row.original;
+      const training = row.original;
       return (
         <ActionColumn
           row ={row} 
-          title='Product' 
-          endpoint={`products/${product.id}`} 
+          title='Training' 
+          endpoint={`trainings/${training.id}`} 
         />
       );      
     },

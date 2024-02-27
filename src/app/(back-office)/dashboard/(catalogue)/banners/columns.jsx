@@ -52,8 +52,16 @@ export const columns = [
     cell: ({ row }) => (<DateColumn row={row} accessorKey='accessorKey' />)
   },
   {
-    id: "actions",
-    header: "Action",
-    cell: ({ row }) => (<ActionColumn row ={row} title='Banner' />)
+    id: "actions",   
+    cell: ({ row }) => {
+      const banner = row.original;
+      return (
+        <ActionColumn
+          row ={row} 
+          title='Banner' 
+          endpoint={`banners/${banner.id}`} 
+        />
+      );      
+    },
   },
 ]

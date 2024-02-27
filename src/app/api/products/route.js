@@ -1,30 +1,10 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function POST(request) {              
-
+export async function POST(request) {
     try {
-        const {
-            barcode,
-            categoryId,
-            description,
-            farmerId,
-            imageUrl,
-            isActive,
-            isWholesale,
-            productCode,
-            productPrice,
-            salePrice,
-            sku,
-            slug,
-            tags,
-            title,
-            unit,
-            wholeSalePrice,
-            wholesaleQty,
-            productStock,
-            qty } = await request.json();
-        // Check if this product already exists in the db
+        const {barcode, categoryId, description, farmerId, imageUrl, isActive, isWholesale, productCode, productPrice, salePrice, sku, slug, tags, title, unit, wholeSalePrice, wholesaleQty, productStock, qty } = await request.json();
+        // Check if this product already exists in the db 
         const existingProduct = await db.product.findUnique({
             where: {
                 slug,
@@ -44,7 +24,7 @@ export async function POST(request) {
                 barcode,
                 categoryId,
                 description,
-                userId:farmerId,
+                userId: farmerId,
                 imageUrl,
                 isActive,
                 isWholesale,
