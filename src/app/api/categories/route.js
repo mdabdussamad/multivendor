@@ -36,10 +36,10 @@ export async function GET(request) {
     try {
         const categories = await db.category.findMany({
             orderBy:{
-                createdAt:"desc"
+                createdAt:"desc",
             },
             include:{
-                products:true
+                products:true,
             }
         });
         return NextResponse.json(categories);

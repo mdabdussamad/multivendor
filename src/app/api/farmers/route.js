@@ -8,7 +8,7 @@ export async function POST(request) {
                 code,
                 contactPerson,
                 ContactPersonPhone,
-                email,
+                email,                    
                 name,
                 notes,
                 phone,
@@ -18,7 +18,7 @@ export async function POST(request) {
             const newFarmer ={code,
                 contactPerson,
                 ContactPersonPhone,
-                email,
+                email,                            
                 name,
                 notes,
                 phone,
@@ -40,16 +40,22 @@ export async function POST(request) {
 
 export async function GET(request) {
     try {
-        const profiles = await db.farmerProfile.findMany({
+        const farmers = await db.user.findMany({
             orderBy:{
-                createdAt:"desc"
-            }
+                createdAt:"desc",
+            },
+            where: {
+                role: 'FARMER',
+            },
+            include: {
+                farmerProfile: true,
+            },
         });
-        return NextResponse.json(profiles);
+        return NextResponse.json(farmers);
     } catch (error) {
         console.log(error)
         return NextResponse.json({
-            message: "Failed to Fetch Profile",
+            message: "Failed to Fetch FARMERs",
         error
         }, {status:500})
     }

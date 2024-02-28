@@ -33,19 +33,23 @@ export const columns = [
     accessorKey: "name",
     header: ({ column }) => (<SortableColumn column={column} title='name' />)
   },
-  {
-    accessorKey: "profileImageUrl",
-    header: "Profile Image",
-    cell: ({ row }) => <ImageColumn row={row} accessorKey='profileImageUrl' />
-  },  
+  // {
+  //   accessorKey: "profileImageUrl",
+  //   header: "Profile Image",
+  //   cell: ({ row }) => <ImageColumn row={row} accessorKey='profileImageUrl' />
+  // },  
   {
     accessorKey: "email",
     header: "Email",
   },  
   {
-    accessorKey: "isActive",
-    header: "Active",
-  },
+    accessorKey: "role",
+    header: "Role",
+  },  
+  // {
+  //   accessorKey: "isActive",
+  //   header: "Active",
+  // },
   {
     accessorKey: "createdAt",
     header: "Date Created",
@@ -58,7 +62,8 @@ export const columns = [
       return (
         <ActionColumn
           row ={row} 
-          title='Farmer' 
+          title='Farmer'
+          editEndpoint = {`farmers/update/${farmer.id}`}  
           endpoint={`farmers/${farmer.id}`} 
         />
       );      

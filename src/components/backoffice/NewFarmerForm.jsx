@@ -69,7 +69,7 @@ export default function NewFarmerForm({user}) {
             register = {register}
             errors = {errors}
             className = "w-full"             
-        />        
+        />                  
         <TextInput
             label = "Farmer's Physical Address"
             name = "physicalAddress"

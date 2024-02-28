@@ -1,9 +1,15 @@
-import React from 'react'
+import FormHeader from '@/components/backoffice/FormHeader';
+import BannerForm from "@/components/backoffice/Forms/BannerForm";
+import {getData} from '@/lib/getData';
+import React from 'react';
 
-export default function updateBanner() {
+export default async function updateBanner( {params: { id } }) {
+  const banner = await getData(`banners/${id}`);
+  console.log(banner);
   return (
     <div>
-        <h2>Update Banner</h2>
+      <FormHeader title="Update Banner" />
+      <BannerForm updateData={banner} />
     </div>
   )
 }
