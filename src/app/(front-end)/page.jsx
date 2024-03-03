@@ -6,10 +6,12 @@ import CommunityTrainings from '@/components/frontend/CommunityTrainings'
 import { getData } from '@/lib/getData';
 
 export default async function Home() {
+  // Fetch data from the 'categories' endpoint
   const categoriesData = await getData('categories');
   const categories = categoriesData.filter((category)=>{
     return category.products.length > 3;
-  });
+  }); 
+
   // console.log(categories);
   return (
     <div className='min-h-screen'>

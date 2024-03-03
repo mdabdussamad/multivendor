@@ -1,9 +1,13 @@
-import React from 'react'
+import FormHeader from '@/components/backoffice/FormHeader'
+import CouponForm from '@/components/backoffice/Forms/CouponForm'
+import { getData } from '@/lib/getData'
 
-export default function updateCoupons() {
+export default async function updateCoupons({params:{id} }) {
+  const coupon = await getData(`coupons/${id}`); 
   return (
     <div>
-        <h2>Update Coupon</h2>
+        <FormHeader title='Update Coupon' />
+        <CouponForm updateData={coupon} />
     </div>
   )
 }

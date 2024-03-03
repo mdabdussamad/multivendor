@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import FormHeader from "@/components/backoffice/FormHeader";
+import React, { useState } from "react"; 
 import TextInput from "@/components/Forminputs/TextInput";
 import { useForm } from "react-hook-form";
 import SubmitButton from "@/components/Forminputs/SubmitButton";
@@ -20,11 +19,14 @@ const QuillEditor = dynamic(
 );
 import { useRouter } from "next/navigation";
 
-export default function NewTrainingForm({categories}) {
-  const [imageUrl, setImageUrl] = useState("");  
+export default function NewTrainingForm({categories, updateData={} }) {
+  const initialContent = updateData?.content ?? "";
+  const initialImageUrl = updateData?.imageUrl ?? "";
+  const id = updateData?.id ?? "";
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);  
   const [loading, setLoading] = useState(false);
   const {
-    register,
+    register, 
     reset,
     watch,
     handleSubmit,
@@ -32,11 +34,12 @@ export default function NewTrainingForm({categories}) {
   } = useForm({
     defaultValues: {
       isActive: true,
+      ...updateData,
     },
   });
 
   // Quill Editor
-  const [content, setContent] = useState("");  
+  const [content, setContent] = useState(initialContent);  
   // Quill Editor End
 
   const router = useRouter();
@@ -50,14 +53,33 @@ export default function NewTrainingForm({categories}) {
     data.imageUrl = imageUrl;
     data.content = content;
     console.log(data);
-    makePostRequest(setLoading, 'api/trainings', data, 'Training', reset, redirect);
-    setImageUrl('');
-    setContent('');
+    if(id){
+      data.id=id
+      // Make Put Request (Update)
+      makePutRequest(
+        setLoading,
+        `api/trainings/${id}`,
+        data,
+        'Training', 
+        redirect,
+       );
+       console.log("update Request:", data);
+    }else{
+      // Make Post Request
+      makePostRequest(
+        setLoading, 
+        'api/trainings', 
+        data, 
+        'Training', 
+        reset, 
+        redirect
+       );
+      setImageUrl('');
+      setContent('');
+    }
   }
   return (
-    <div>
-      <FormHeader title="New Training" />
-      <form
+    <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3"
       >
@@ -108,10 +130,12 @@ export default function NewTrainingForm({categories}) {
 
         <SubmitButton
           isLoading={loading}
-          buttonTitle="Create Training"
-          loadingButtonTitle="Creating Training please wait..."
+          buttonTitle={id ? 'Update Training' : 'Create Training'} 
+          loadingButtonTitle={`${id ? 'Updating' : 'Creating'}
+          Training please wait...`
+        }
         />
-      </form>
-    </div>
-  );
-}
+          </form>
+      );
+    }
+    

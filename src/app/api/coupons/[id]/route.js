@@ -50,4 +50,38 @@ export async function DELETE(request, { params: { id } }) {
     }
 }
 
+export async function PUT(request,{params: { id } }) {
+    try {
+        const {title, couponCode, expiryDate, isActive} = await request.json();          
+        const existingCoupon = await db.coupon.findUnique({
+            where: {
+                id,
+            },
+        });
+        if (!existingCoupon){
+            return NextResponse.json({
+                data: null,
+                message: "Coupon not Found"
+            }, 
+            {status:404}
+            );
+        }
+        const updatedCoupon = await db.coupon.update({
+            where: {id},
+            data: {
+                title, 
+                couponCode, 
+                expiryDate,
+                isActive
+            },
+        });
+        return NextResponse.json(updatedCoupon);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({
+            message: "Failed to update Coupon",
+        error
+        }, {status:500})
+    }
+}
 

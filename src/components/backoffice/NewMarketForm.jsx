@@ -13,8 +13,13 @@ import SelectInput from "@/components/Forminputs/SelectInput"
 import ToggleInput from "@/components/Forminputs/ToggleInput";
 import { useRouter } from "next/navigation";
 
-export default function NewMarketForm({categories}) {
-  const [imageUrl, setImageUrl] = useState(""); 
+export default function NewMarketForm({
+  categories,
+  updateData = {},
+}) {
+  const initialImageUrl = updateData?.logoUrl ?? "";
+  const id = updateData?.id ?? "";
+  const [imageUrl, setImageUrl] = useState(initialImageUrl); 
   const [loading, setLoading] = useState(false);
   const {
     register, 
@@ -24,7 +29,8 @@ export default function NewMarketForm({categories}) {
     formState:{errors},
   } = useForm({
       defaultValues : {
-        isActive : true
+        isActive : true,
+        ...updateData,
       }
     });
     const router = useRouter()
@@ -38,13 +44,32 @@ export default function NewMarketForm({categories}) {
     data.slug = slug;
     data.logoUrl = imageUrl
     console.log(data);
-    makePostRequest(setLoading, 'api/markets', data, 'Market', reset, redirect);
-    setImageUrl('');
+    if(id){
+      data.id = id
+      // Make Put Request (Update)
+      makePutRequest(
+        setLoading,
+        `api/markets/${id}`,
+        data,
+        'Market', 
+        redirect,
+       );
+       console.log("update Request:", data);
+    }else{
+      // Make Post Request
+      makePostRequest(
+        setLoading, 
+        'api/markets', 
+        data, 
+        'Market', 
+        reset, 
+        redirect
+        );
+      setImageUrl('');
+    }
   }
   return (    
-    <div>
-      <FormHeader title="New Market" />
-      <form onSubmit={handleSubmit(onSubmit)} 
+    <form onSubmit={handleSubmit(onSubmit)} 
       className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3">
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
@@ -86,13 +111,12 @@ export default function NewMarketForm({categories}) {
       </div>
       
       <SubmitButton 
-      isLoading={loading} 
-      buttonTitle='Create Market' 
-      loadingButtonTitle='Creating Market please wait...' 
+        isLoading={loading} 
+        buttonTitle={id ? 'Update Market' : 'Create Market'} 
+        loadingButtonTitle={`${id ? 'Updating' : 'Creating'}
+        Market please wait...`
+      }
       />
       </form>
-      
-      
-    </div>
   );
 }

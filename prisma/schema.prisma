@@ -51,6 +51,7 @@ model Category {
 
   marketIds   String[]  @db.ObjectId
   markets     Market[]  @relation(fields: [marketIds], references: [id])
+
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
 }
@@ -80,17 +81,17 @@ model Product {
   unit          String?
   productPrice  Float
   salePrice     Float
-  wholeSalePrice  Float
-  wholesaleQty  Int
-  productStock  Int
-  qty           Int
+  wholeSalePrice  Float?
+  wholesaleQty  Int?
+  productStock  Int?
+  qty           Int?
   tags          String[]
  
   categoryId    String     @db.ObjectId
   category      Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
  
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId        String     @db.ObjectId @unique
+  userId        String     @db.ObjectId  
 
   createdAt     DateTime   @default(now())
   updatedAt     DateTime?  @updatedAt
@@ -100,9 +101,9 @@ model Training {
   id             String     @id @default(auto()) @map("_id") @db.ObjectId 
   title          String 
   slug           String     @unique
-  imageUrl       String 
-  description    String 
-  content        String 
+  imageUrl       String? 
+  description    String? 
+  content        String? 
   isActive       Boolean 
   category       Category?   @relation(fields: [categoryId], references: [id])
   categoryId     String     @db.ObjectId
@@ -123,10 +124,8 @@ model User {
   name          String?
   email         String?    @unique
   password      String
-  emailVerified DateTime?  
-
+  emailVerified DateTime? 
   products      Product[]
-
   role          UserRole   @default(USER) 
 
   farmerProfile FarmerProfile?
@@ -152,7 +151,7 @@ model FarmerProfile {
   landSize               Float  
   mainCrop               String 
   
-  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user                   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId                 String     @db.ObjectId @unique
  
   createdAt              DateTime  @default(now())

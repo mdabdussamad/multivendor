@@ -3,11 +3,9 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Image from "next/image";
-import Link from "next/link";
-import { BaggageClaim } from "lucide-react";
+import Product from '@/components/frontend/Product'
 
-export default function CategoryCarousel({ products }) {
+export default function CategoryCarousel({ products }) {  
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -34,10 +32,10 @@ export default function CategoryCarousel({ products }) {
       ssr={true} // means to render carousel on server-side.
       infinite={true}
       autoPlay={true}
-      autoPlaySpeed={1000}
+      autoPlaySpeed={5000}
       keyBoardControl={true}
       customTransition="all .5"
-      transitionDuration={500}
+      transitionDuration={1000}
       containerClass="carousel-container"
       removeArrowOnDeviceType={["tablet", "mobile"]}
       //   deviceType={}
@@ -46,31 +44,7 @@ export default function CategoryCarousel({ products }) {
     >
       {products.map((product, i) => {
         return (
-          <div key={i} className="rounded-lg mr-3 bg-white dark:bg-slate-900 overflow-hidden border shadow">
-            <Link href={`/products/${product.slug}`}>
-              <Image
-                src={product.imageUrl}
-                alt={product.title}
-                width={556}
-                height={556}
-                className="w-full h-48 object-cover"
-              />
-            </Link>
-            <Link href={`/products/${product.slug}`}>
-              <h2 className="text-center dark:text-slate-200 text-slate-800 my-2 font-semibold">
-                {product.title}
-              </h2>
-            </Link>
-            <div className="px-4">
-              <div className="flex items-center justify-between gap-2 pb-3 dark:text-slate-200 text-slate-800">
-                <p>NPR {product.salePrice}</p>
-                <button className="flex items-center space-x-2 bg-lime-600 px-4 py-2 rounded-md text-white">
-                  <BaggageClaim />
-                  <span>Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
+          <Product product={product} key={i}/>
         );
       })}
     </Carousel>
