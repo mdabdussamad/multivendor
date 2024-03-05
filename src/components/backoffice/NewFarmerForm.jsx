@@ -32,15 +32,25 @@ export default function NewFarmerForm({user}) {
     });
     const router = useRouter()
     function redirect(){
-      router.push('/dashboard/farmers');
+      router.push('/login');
     }  
   const isActive = watch('isActive');
   async function onSubmit(data){   
     
     const code = generateUserCode("LFF", data.name);
-    data.code = code;    
+    data.code = code; 
+    data.userId = user.id;
+    data.products = products; 
+    data.profileImageUrl = imageUrl;  
     console.log(data);
-    makePostRequest(setLoading, 'api/farmers', data, 'Farmer', reset, redirect);    
+    makePostRequest(
+      setLoading, 
+      'api/farmers', 
+      data, 
+      'Farmer', 
+      reset, 
+      redirect
+      );    
   }
   return (    
     <form onSubmit={handleSubmit(onSubmit)} 

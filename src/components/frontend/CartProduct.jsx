@@ -5,12 +5,14 @@ import Image from "next/image";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { useDispatch } from 'react-redux';
 import { decrementQty, incrementQty, removeFromCart } from '@/redux/slices/cartSlice';
+import toast from 'react-hot-toast';
 
 export default function CartProduct({cartItem}) {
   const dispatch = useDispatch()
   function handleCartItemDelete(cartId){
     // Dispatch the removeFromCart Reducer
     dispatch(removeFromCart(cartId));
+    toast.success('Item added Successfully');
   } 
   function handleQtyIncrement(cartId){
     // Dispatch the removeFromCart Reducer

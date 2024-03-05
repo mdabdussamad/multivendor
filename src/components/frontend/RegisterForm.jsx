@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast"; 
+import toast from "react-hot-toast";
 import SubmitButton from "../Forminputs/SubmitButton";
 import TextInput from "../Forminputs/TextInput";
 
-export default function RegisterForm({role="USER"}) {
+export default function RegisterForm({ role = "USER" }) {
   const router = useRouter(); // Redirecting on the client side
   const {
     register,
@@ -29,20 +29,20 @@ export default function RegisterForm({role="USER"}) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      });      
+      });
       const responseData = await response.json();
       if (response.ok) {
-        console.log(responseData)
+        console.log(responseData);
         setLoading(false);
         toast.success("User Created Successfully");
         reset();
         // if role=user => home
         // if role=farmer => onboarding
         // const userRole = responseData.data.role
-        if(role==="USER"){
+        if (role === "USER") {
           router.push("/");
-        }else{
-          router.push(`/onboarding/${responseData.data.id}`);
+        } else {
+          router.push("/verify-email");
         }
       } else {
         setLoading(false);
@@ -63,45 +63,44 @@ export default function RegisterForm({role="USER"}) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="">   
-      <TextInput 
+    <form onSubmit={handleSubmit(onSubmit)} className="">
+      <TextInput
         label=""
         name="role"
         register={register}
         errors={errors}
-        type="hidden" 
-        defaultValue={role} 
-        className="sm:col-span-2 mb-3"       
+        type="hidden"
+        defaultValue={role}
+        className="sm:col-span-2 mb-3"
       />
-      <TextInput 
+      <TextInput
         label="Your Full Name"
         name="name"
         register={register}
         errors={errors}
-        type="text"  
-        className="sm:col-span-2 mb-3"       
+        type="text"
+        className="sm:col-span-2 mb-3"
       />
-      <TextInput 
+      <TextInput
         label="Email Address"
         name="email"
         register={register}
         errors={errors}
         type="email"
-        className="sm:col-span-2 mb-3"              
+        className="sm:col-span-2 mb-3"
       />
-      
-      {emailErr && 
-        <small className="text-red-600 -mt-2 mb-2">
-            {emailErr}
-        </small>}      
 
-      <TextInput 
+      {emailErr && (
+        <small className="text-red-600 -mt-2 mb-2">{emailErr}</small>
+      )}
+
+      <TextInput
         label="Password"
         name="password"
         register={register}
         errors={errors}
-        type="password" 
-        className="sm:col-span-2 mb-3"     
+        type="password"
+        className="sm:col-span-2 mb-3"
       />
 
       <SubmitButton
@@ -109,16 +108,39 @@ export default function RegisterForm({role="USER"}) {
         buttonTitle="Register"
         loadingButtonTitle="Creating Please wait..."
       />
-      
-      <p className="text-sm font-light text-gray-500 dark:text-gray-400 py-4">
-        Already have an account?{" "}
-        <Link
-          href="/login"
-          className="font-medium text-lime-600 hover:underline dark:text-lime-500"
-        >
-          Login
-        </Link>
-      </p>
+
+      <div className="flex gap-2 justify-between">
+        <p className="text-[0.75rem] font-light text-gray-500 dark:text-gray-400 py-4">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="font-medium text-lime-600 hover:underline dark:text-lime-500"
+          >
+            Login
+          </Link>
+        </p>
+        {role === "USER" ? (
+          <p className="text-[0.75rem] font-light text-gray-500 dark:text-gray-400 py-4">
+            Are you a Farmer?{" "}
+            <Link
+              href="/register-farmer"
+              className="font-medium text-lime-600 hover:underline dark:text-lime-500"
+            >
+              Register here
+            </Link>
+          </p>
+        ) : (
+          <p className="text-[0.75rem] font-light text-gray-500 dark:text-gray-400 py-4">
+            Are you a User ?{" "}
+            <Link
+              href="/register"
+              className="font-medium text-lime-600 hover:underline dark:text-lime-500"
+            >
+              Register here
+            </Link>
+          </p>
+        )}
+      </div>
     </form>
   );
 }

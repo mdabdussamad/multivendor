@@ -2,10 +2,13 @@
 // Create reducers
 // Export the reducer and reducers
 
-import { createSlice } from "@reduxjs/toolkit";
-// const { createSlice } = require("@reduxjs/toolkit");
+// import { createSlice } from "@reduxjs/toolkit";
+const { createSlice } = require("@reduxjs/toolkit");
 
-const initialState = [];
+// Get initial state from localStorage if available
+const initialState = 
+(typeof window !== 'undefined' && JSON.parse(localStorage.getItem('cart'))) || [];
+
 const cartSlice = createSlice({
     name: "cart",
     initialState,
@@ -23,14 +26,18 @@ const cartSlice = createSlice({
                 const newItem = { id, title, salePrice, qty: 1, imageUrl };
                 state.push(newItem);
                 // Update localStorage with the new state
-                localStorage.setItem("cart", JSON.stringify([...state, newItem]));
+                if(typeof window !== 'undefined') {
+                    localStorage.setItem("cart", JSON.stringify([...state]));
+                }
             }
         },
         removeFromCart: (state, action) => {
             const cartId = action.payload;
             const newState = state.filter((item) => item.id !== cartId);
             // Update localStorage with the new state
-            localStorage.setItem("cart", JSON.stringify(newState));
+            if(typeof window !== 'undefined'){
+                localStorage.setItem("cart", JSON.stringify(newState));
+            }
             return newState;
         },
         incrementQty: (state, action) => {
@@ -39,7 +46,9 @@ const cartSlice = createSlice({
             if (cartItem) {
                 cartItem.qty += 1;
                 // Update localStorage with the new state
-                localStorage.setItem("cart", JSON.stringify([...state]));
+                if(typeof window !== 'undefined') {
+                    localStorage.setItem("cart", JSON.stringify([...state]));
+                }
             }
         },
         decrementQty: (state, action) => {
@@ -48,7 +57,9 @@ const cartSlice = createSlice({
             if (cartItem && cartItem.qty > 1) {
                 cartItem.qty -= 1;
                 // Update localStorage with the new state
-                localStorage.setItem("cart", JSON.stringify([...state]));
+                if(typeof window !== 'undefined') {
+                    localStorage.setItem("cart", JSON.stringify([...state]));
+                }
             }
         },
     },
