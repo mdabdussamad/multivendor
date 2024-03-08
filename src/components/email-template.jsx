@@ -33,10 +33,8 @@ import {
             width="32"
             height="32"
             alt="Github"
-          />
-  
-          <Text style={title}>{linkText}</Text>
-  
+          />  
+          <Text style={title}>{linkText}</Text>  
           <Section style={section}>
             <Text style={text}>
               Hey <strong>{name}</strong>!
