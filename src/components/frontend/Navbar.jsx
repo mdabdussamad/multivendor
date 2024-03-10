@@ -29,7 +29,7 @@ export default function Navbar() {
             <div className="flex-grow">
                 <SearchForm />
             </div>
-            <div className="flex gap-8">
+            <div className="flex gap-8 text-slate-50">
                 {
                     status==="unauthenticated"?(
                         <Link href='/login' className="flex items-center space-x-1 text-green-950 dark:text-slate-100">

@@ -10,7 +10,7 @@ export default function CartSubTotalCard({subTotal}) {
     Number(tax)
     ).toFixed(2);
   return (
-    <div className="md:col-span-4 col-span-full sm:block bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-700 text-slate-800 overflow-hidden p-5 dark:text-slate-100 font-bold">
+    <div className="md:col-span-4 col-span-full sm:block bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-700 text-slate-800 overflow-hidden p-5 dark:text-slate-100 font-bold ">
           <h2 className="text-2xl pb-3">Cart Total</h2>
           <div className="flex items-center justify-between border-b border-slate-500 pb-6">
             <span>Subtotal</span>
@@ -31,12 +31,14 @@ export default function CartSubTotalCard({subTotal}) {
             <span>Total</span>
             <span>NPR {totalPrice}</span>
           </div>
+          <div className="flex justify-center items-center mt-4">
           <Link
-            href="#"
-            className="bg-slate-200 text-slate-900 rounded-lg py-2 px-4 font-normal"
+            href="/checkout"
+            className="text-slate-50 rounded-lg py-3 px-6 font-normal bg-slate-900 dark:bg-lime-600"
           >
-            Continue to Payment
+            Continue to Checkout
           </Link>
+          </div>
         </div>
   )  
 }

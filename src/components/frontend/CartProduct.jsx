@@ -33,11 +33,11 @@ export default function CartProduct({cartItem}) {
         alt={cartItem.title}
         className="rounded-xl w-20 h-20"
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col dark:text-slate-50 text-slate-800">
         <h2>{cartItem.title}</h2>       
       </div>
     </div>
-    <div className="rounded-xl border border-gray-400 flex gap-3 items-center">
+    <div className="rounded-xl border border-gray-400 flex gap-3 items-center dark:text-slate-50 text-slate-800">
       <button onClick={()=>handleQtyDecrement(cartItem.id)}
       className="border-r border-gray-400 py-2 px-4">
         <Minus />
@@ -48,7 +48,7 @@ export default function CartProduct({cartItem}) {
         <Plus />
       </button>
     </div>
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 dark:text-slate-50 text-slate-800">
       <h4>NPR {cartItem.salePrice}</h4>
       <button onClick={()=>handleCartItemDelete(cartItem.id)}>
         <Trash2 className="text-red-600 w-5 h-5" />
