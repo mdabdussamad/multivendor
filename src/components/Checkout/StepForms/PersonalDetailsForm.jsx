@@ -6,8 +6,11 @@ import { useForm } from "react-hook-form";
 import NavButtons from "./NavButtons";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentStep, updateCheckoutFormData } from "@/redux/slices/checkoutSlice";
+import { useSession } from "next-auth/react";
 
 export default function PersonalDetailsForm() {
+  const {data:session,status} = useSession()
+  const userId = session?.user?.id;
   const currentStep = useSelector((store) => store.checkout.currentStep);
   const existingFormData = useSelector((store) => store.checkout.checkoutFormData);
   const {
@@ -24,6 +27,7 @@ export default function PersonalDetailsForm() {
     
   const dispatch = useDispatch();    
   async function processData(data) {
+    data.userId = userId;
     // Update the checkout Data
     dispatch(updateCheckoutFormData(data));
     // Update the Current Step

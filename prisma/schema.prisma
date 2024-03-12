@@ -93,6 +93,7 @@ model Product {
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId        String     @db.ObjectId  
 
+  orderItems     OrderItem[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime?  @updatedAt
 }
@@ -130,6 +131,7 @@ model User {
   verificationToken String?
   farmerProfile FarmerProfile?
   profile        UserProfile? // Link to user profile
+  orders         Order[] // User can have multiple Orders 
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt   
 }
@@ -172,3 +174,37 @@ model FarmerProfile {
 
 // User:- ADMIN TEACHER PARENT STUDENT
 
+model Order {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String    @db.ObjectId @unique
+  // Personal Details
+  firstName      String
+  lastName       String
+  email          String
+  phone          String
+  // Shipping Details
+  streetAddress  String
+  city           String
+  country        String
+  district       String
+  shippingCost   Float 
+  // Payment Method
+  paymentMethod  String 
+  // Order Items  
+  orderItems     OrderItem[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model OrderItem {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  orderId     String    @db.ObjectId
+  productId   String    @db.ObjectId
+  quantity    Int
+  price       Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  order       Order     @relation(fields: [orderId], references: [id])
+  product     Product   @relation(fields: [productId], references: [id])
+}
