@@ -39,17 +39,34 @@ export async function POST(request) {
                 userId,
             }
         });
+        
+        // Create orderNumber
+        function generateOrderNumber(length) {
+            const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let orderNumber = '';
+          
+            for (let i = 0; i < length; i++) {
+              const randomIndex = Math.floor(Math.random() * characters.length);
+              orderNumber += characters.charAt(randomIndex);
+            }
+          
+            return orderNumber;
+          }
+          
 
         // Create Order Item
-        const newOrderItems = await Prisma.orderItem.createMany({
+        const newOrderItems = await prisma.orderItem.createMany({
             data: orderItems.map((item) => ({
                 productId: item.id,
                 quantity: parseInt(item.qty),
                 price: parseFloat(item.salePrice),        
-                orderId: newOrder.id,               
+                orderId: newOrder.id, 
+                imageUrl: item.imageUrl,
+                title: item.title,
+                orderNumber: generateOrderNumber(8),              
             })),
         });
-        console.log(newOrderItems);
+        console.log(newOrder, newOrderItems);
         return NextResponse.json(newOrder);
     } catch (error) {
         console.log(error)
@@ -64,8 +81,11 @@ export async function GET(request) {
     try {
         const orders = await db.order.findMany({
             orderBy: {
-                createdAt: "desc"
-            }
+                createdAt: "desc",
+            },
+            include:{
+                orderItems:true,
+            },
         });
         return NextResponse.json(orders);
     } catch (error) {

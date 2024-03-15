@@ -35,7 +35,7 @@ export default function OrderSummary() {
     try {
       setLoading(true);
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; 
-         
+
       const response = await fetch(`${baseUrl}/api/orders`, {
         method: "POST",
         headers: {
@@ -43,11 +43,11 @@ export default function OrderSummary() {
         },
         body: JSON.stringify(data),
       });  
+      const responseData = await response.json();
       if (response.ok) {
         setLoading(false);
-        toast.success("Order Created Successfully");
-        reset();
-        router.push("/order-confirmation");
+        toast.success("Order Created Successfully");  
+        router.push(`/order-confirmation/${responseData.id}`);
       } else {
         setLoading(false);       
         toast.error("Something Went Wrong, Please Try Again");

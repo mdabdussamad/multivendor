@@ -119,6 +119,14 @@ enum UserRole {
   FARMER
   MODERATOR
 }
+ 
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELED
+}
 
 model User {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
@@ -176,7 +184,7 @@ model FarmerProfile {
 
 model Order {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId         String    @db.ObjectId @unique
+  userId         String    @db.ObjectId  
   // Personal Details
   firstName      String
   lastName       String
@@ -192,15 +200,20 @@ model Order {
   paymentMethod  String 
   // Order Items  
   orderItems     OrderItem[]
+  // Status
+  orderStatus    OrderStatus @default(PROCESSING) // Set PROCESSING as the default value
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user           User      @relation(fields: [userId], references: [id])
 }
 
 model OrderItem {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   orderId     String    @db.ObjectId
   productId   String    @db.ObjectId
+  imageUrl    String?
+  title       String?
+  orderNumber String?
   quantity    Int
   price       Float
   createdAt   DateTime  @default(now())

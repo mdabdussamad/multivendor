@@ -9,12 +9,13 @@ import EmptyCart from "@/components/frontend/EmptyCart";
 
 export default function Cart() {
   const cartItems = useSelector((store) => store.cart);
-  const subTotal = cartItems.reduce((acc,currentItem)=>{
+  const subTotal = 
+  cartItems.reduce((acc,currentItem)=>{
     return acc + (currentItem.salePrice * currentItem.qty)
   },0)
   .toFixed(2) ?? 0;
 
-  console.log(cartItems);
+  console.log(subTotal);
   return (
     <div>
       <Breadcrumb />
