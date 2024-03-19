@@ -3,18 +3,15 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request, { params: { id } }) {
     try {
-        const orders = await db.order.findMany({
-            where:{
+        const order = await db.order.findUnique({
+            where: {
                 userId:id,
             },
-            orderBy: {
-                createdAt: "desc",
-            },
             include:{
-                orderItems:true,
+                orderItems:true, 
             },
         });
-        return NextResponse.json(orders);
+        return NextResponse.json(order);
     } catch (error) {
         console.log(error)
         return NextResponse.json({

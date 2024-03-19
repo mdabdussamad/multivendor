@@ -38,7 +38,7 @@ export default function UserAvatar({ user={} }) {
               className="w-8 h-8 rounded-full"
             />
           ):(
-            <div className="w-10 h-10 p-4 flex items-center justify-center rounded-full bg-slate-800 shadow-md border border-slate-600">{initials}</div>
+            <div className="w-10 h-10 p-4 flex items-center justify-center rounded-full bg-slate-50 text-slate-800  dark:text-slate-50 dark:bg-slate-800 shadow-md border border-slate-600">{initials}</div>
           )}
         </button>
       </DropdownMenuTrigger>

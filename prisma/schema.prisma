@@ -196,10 +196,13 @@ model Order {
   country        String
   district       String
   shippingCost   Float 
+  orderNumber    String?
   // Payment Method
   paymentMethod  String 
+
   // Order Items  
   orderItems     OrderItem[]
+  
   // Status
   orderStatus    OrderStatus @default(PROCESSING) // Set PROCESSING as the default value
   createdAt      DateTime  @default(now())
@@ -212,8 +215,7 @@ model OrderItem {
   orderId     String    @db.ObjectId
   productId   String    @db.ObjectId
   imageUrl    String?
-  title       String?
-  orderNumber String?
+  title       String?  
   quantity    Int
   price       Float
   createdAt   DateTime  @default(now())

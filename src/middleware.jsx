@@ -7,4 +7,4 @@ export default withAuth({
     // error: '/error',
   },
 });
-export const config = { matcher: ["/dashboard","/dashboard/profile"] }; 
+export const config = { matcher: ["/dashboard/:path*","/checkout"] }; 

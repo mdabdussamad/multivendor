@@ -69,6 +69,11 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       href: "/dashboard/orders",
     },
     {
+      title: "Sales",
+      icon: Truck,
+      href: "/dashboard/sales",
+    },
+    {
       title: "Our Staff",
       icon: User,
       href: "/dashboard/staff",
@@ -135,6 +140,11 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         href: "/dashboard/orders",
       },
       {
+        title: "Sales",
+        icon: Truck,
+        href: "/dashboard/sales",
+      },
+      {
         title: "Hygienic Community Trainings",
         icon: Building2,
         href: "/dashboard/community",
@@ -164,7 +174,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
   if (role === "USER") {
     sidebarLinks = [
       {
-        title: "Orders",
+        title: "My Orders",
         icon: Truck,
         href: "/dashboard/orders",
       },
