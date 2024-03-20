@@ -7,15 +7,15 @@ import { getData } from "@/lib/getData";
 import Link from "next/link";
 
 export default async function ProductDetailPage({ params: { slug } }) {
-  const category = await getData("/categories/65d8db34598b36a88a4650fd");
+  const product = await getData(`products/product/${slug}`);
   return (
-    <div>
+    <div className="mt-16">
       <Breadcrumb />
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-3">
           <Image
-            src="/vegitables1.jpg"
-            alt="vegetables"
+            src={product.imageUrl}
+            alt={product.title}
             width={556}
             height={556}
             className="w-full"
@@ -24,7 +24,7 @@ export default async function ProductDetailPage({ params: { slug } }) {
         <div className="col-span-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl lg:text-3xl font-semibold">
-              Calabaza Squash product
+            {product.title}
             </h2>
             <button>
               <Share2 />
@@ -32,21 +32,19 @@ export default async function ProductDetailPage({ params: { slug } }) {
           </div>
           <div className="border-b border-gray-500">
             <p className="py-2">
-              To keep basil fresh, trim the stems and place them in a glass or
-              jar of water. To keep basil fresh, trim the stems and place them
-              in a glass or jar of water.
+            {product.description}
             </p>
             <div className="flex items-center gap-8 mb-4">
-              <p>SKU: 32453453</p>
+              <p>SKU: {product.sku}</p>
               <p className="bg-lime-200 py-1.5 px-4 rounded-full text-slate-900">
-                <b>Stock</b>: 123
+                <b>Stock</b>: {product.qty}
               </p>
             </div>
           </div>
           <div className="flex items-center justify-between gap-4 pt-4 border-b border-gray-500 mb-4">
             <div className="flex items-center gap-4">
-              <h4 className="text-2xl">NPR 4000</h4>
-              <del className="text-slate-400 text-sm">NPR 10000</del>
+              <h4 className="text-2xl">NPR {product.salePrice}</h4>
+              <del className="text-slate-400 text-sm">NPR {product.productPrice}</del>
             </div>
             <p className="flex items-center">
               <Tag className="w-5 h-5 text-slate-400 me-2" />
@@ -124,7 +122,7 @@ export default async function ProductDetailPage({ params: { slug } }) {
         <h2 className="mb-4 text-xl font-semibold text-slate-200 ml-3">
           Similar Products
         </h2>
-        <CategoryCarousel products={category.products} />
+        {/* <CategoryCarousel products={category.products} /> */}
       </div>
     </div>
   );

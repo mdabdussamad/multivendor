@@ -14,7 +14,7 @@ export async function POST(request) {
             return NextResponse.json(
                 {
                     data: null,
-                    message: "Product already exists",
+                    message: "Product (${title}) already exists in the Database",
                 },
                 { status: 409 }
             );

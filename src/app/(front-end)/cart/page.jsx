@@ -9,8 +9,10 @@ import EmptyCart from "@/components/frontend/EmptyCart";
 
 export default function Cart() {
   const cartItems = useSelector((store) => store.cart);
+  console.log(cartItems);
   const subTotal = 
-  cartItems.reduce((acc,currentItem)=>{
+  cartItems
+  .reduce((acc,currentItem)=>{
     return acc + (currentItem.salePrice * currentItem.qty)
   },0)
   .toFixed(2) ?? 0;
