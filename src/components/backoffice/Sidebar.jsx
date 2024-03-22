@@ -43,9 +43,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
 
   if (status === "loading") {
     return <p>Loading...</p>;
-  }
-  // const role = session?.user?.role;
-  // const pathname = usePathname();
+  }   
 
   let sidebarLinks = [
     {
@@ -133,12 +131,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         title: "Markets",
         icon: Warehouse,
         href: "/dashboard/markets",
-      },
-      {
-        title: "Orders",
-        icon: Truck,
-        href: "/dashboard/orders",
-      },
+      },      
       {
         title: "Sales",
         icon: Truck,
@@ -170,6 +163,18 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         href: "/",
       },
     ];
+    catalogueLinks = [
+      {
+        title: "Products",
+        icon: Boxes,
+        href: "/dashboard/products",
+      },       
+      {
+        title: "Coupons",
+        icon: ScanSearch,
+        href: "/dashboard/coupons",
+      },      
+    ];
   }
   if (role === "USER") {
     sidebarLinks = [
@@ -193,8 +198,8 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
   }
   
   async function handleLogout(){
-    await signOut()
-    router.push("/")
+    await signOut();
+    router.push("/");
   }
 
   return (

@@ -3,13 +3,14 @@ import db from "@/lib/db";
 
 export async function POST(request) {    
     try {
-        const {title, couponCode, expiryDate, isActive} = await request.json();
+        const {title, couponCode, expiryDate, isActive, vendorId} = await request.json();
         const newCoupon = await db.coupon.create({
             data:{
                 title, 
                 couponCode, 
                 expiryDate,
-                isActive
+                isActive,
+                vendorId
             },
         });
         console.log(newCoupon)

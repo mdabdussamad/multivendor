@@ -14,7 +14,7 @@ export default function Cart() {
   cartItems
   .reduce((acc,currentItem)=>{
     return acc + (currentItem.salePrice * currentItem.qty)
-  },0)
+  }, 0)
   .toFixed(2) ?? 0;
 
   console.log(subTotal);

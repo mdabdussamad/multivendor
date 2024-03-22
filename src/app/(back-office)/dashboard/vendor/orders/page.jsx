@@ -6,26 +6,26 @@ import { columns } from "./columns";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 
-export default async function Customers() {
+export default async function Coupons() {
   const session = await getServerSession(authOptions);
   const id = session?.user?.id;
   const role = session?.user?.role;
-  const allSales = await getData("sales");
+  const sales = await getData("sales");
 
   // Fetch all the Sales
   // Filter by vendorId => to get sales for this vendor
   // Fetch Order by Id
   // Customer Name, Email, Phone, OrderNumber 
-  const farmerSales = allSales.filter((sale)=>sale.vendorId==="65e0174f17356fa7179efb53");
+  const farmerSales = allSales.filter((sale)=>sale.venderId===id);
 
   return (
     <div>
       {/* Header */}
-      {/* <PageHeader
+      <PageHeader
         heading="Coupons"
         href="/dashboard/coupons/new"
         linkTitle="Add Coupon"
-      /> */}
+      />
 
       <div className="py-8">
       {role==="ADMIN"?(

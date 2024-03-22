@@ -10,13 +10,19 @@ import {makePostRequest, makePutRequest} from '@/lib/apiRequest'
 import ToggleInput from "@/components/Forminputs/ToggleInput";
 import { useRouter } from "next/navigation";
 import {convertIsoDateToNormal} from '@/lib/convertIsoDateToNormal'
+import { useSession } from 'next-auth/react'
+
 
 export default function CouponForm({ updateData={} }) { 
+  const {data:session,status} = useSession();
+  const vendorId = session?.user?.id;
   const expiryDateNormal = convertIsoDateToNormal(updateData.expiryDate);
   const id = updateData?.id ??"";  
   updateData.expiryDate = expiryDateNormal;   
   const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState(); 
+  
+
   const {
     register, 
     reset, 
@@ -30,12 +36,18 @@ export default function CouponForm({ updateData={} }) {
     }
   });
   const isActive = watch('isActive') 
-  const router = useRouter();  
+  const router = useRouter(); 
+
+  if (status==='loading'){
+    return <p>loading...</p>
+  }
+  
   function redirect(){
     router.push('/dashboard/coupons');
   }
 
-  async function onSubmit(data){    
+  async function onSubmit(data){  
+    data.vendorId = vendorId;  
     const couponCode = generateCouponCode(data.title, data.expiryDate);
     const isoFormattedDate = generateIsoFormattedDate(data.expiryDate);
     data.expiryDate = isoFormattedDate
@@ -58,7 +70,8 @@ export default function CouponForm({ updateData={} }) {
             data, 
             'Coupon', 
             reset, 
-            redirect);     
+            redirect
+            );     
     }
   }
   return (    
